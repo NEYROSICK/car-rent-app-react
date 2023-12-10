@@ -1,9 +1,33 @@
+:root {
+  /*background colors*/
+  --clr-bcg: #fff;
+  --clr-bcg-backdrop: #12141780;
+  --clr-bcg-filter: #f7f7fb;
+
+  /*text colors*/
+  --clr-primary: #121417;
+  --clr-primary-inv: #fff;
+  --clr-secondary: rgba(18, 20, 23, 0.5);
+
+  /*other colors*/
+  --clr-brand: #3470ff;
+  --clr-hover: #0b44cd;
+
+  /*global variables*/
+  --scrollbar-width: 12px;
+}
+
 body {
+  width: 100vw;
+  overflow-x: hidden;
   margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  color: var(--clr-primary);
 }
 
 p,
@@ -44,4 +68,27 @@ code {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  overflow: overlay;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--clr-bcg);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
