@@ -97,19 +97,21 @@ export const BrandList = styled.div`
       display: flex;
       flex-direction: column;
       background-color: var(--clr-bcg);
-
-      & > li {
-        width: 192px;
-        padding: 4px 10px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      & > li:hover {
-        color: var(--clr-primary);
-        background-color: var(--clr-bcg-scrollbar);
-      }
     }
+  }
+`;
+
+export const BrandItem = styled.li`
+  width: 192px;
+  padding: 4px 10px;
+  color: ${({ brand, clickedOption }) =>
+    brand !== clickedOption ? "inherit" : "var(--clr-primary)"};
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    color: var(--clr-primary);
+    background-color: var(--clr-bcg-scrollbar);
   }
 `;

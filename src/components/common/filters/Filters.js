@@ -1,6 +1,6 @@
 import { useState } from "react";
 import IconChevron from "../icons/IconChevron";
-import { BrandContainer, BrandList, FiltersList, SelectBtn } from "./filters.styled";
+import { BrandContainer, BrandItem, BrandList, FiltersList, SelectBtn } from "./filters.styled";
 import brands from "../../../assets/carBrands.json";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrand } from "../../../redux/selectors";
@@ -9,11 +9,13 @@ import { nanoid } from "nanoid";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
+  const [clickedOption, setClickedOption] = useState("");
   const brand = useSelector(getBrand);
   const dispatch = useDispatch();
 
   const handleBrandClick = (e) => {
     dispatch(changeFilter(e.target.innerText));
+    setClickedOption(e.target.innerText);
     setIsBrandOpen(!isBrandOpen);
   };
 
@@ -36,9 +38,14 @@ const Filters = () => {
             <div>
               <ul>
                 {brands.map((brand) => (
-                  <li onClick={handleBrandClick} key={nanoid()}>
+                  <BrandItem
+                    onClick={handleBrandClick}
+                    clickedOption={clickedOption}
+                    brand={brand}
+                    key={nanoid()}
+                  >
                     {brand}
-                  </li>
+                  </BrandItem>
                 ))}
                 {/* <li>Buick</li>
                 <li>Volvo</li>
