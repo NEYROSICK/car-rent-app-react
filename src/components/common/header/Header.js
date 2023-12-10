@@ -8,10 +8,13 @@ const Header = () => {
   return (
     <HeaderSection>
       <Container>
-        <Nav>
+        <h1>
           <LogoLink to="/">
             <img src={Logo} alt="Carspace Logo" />
+            <span>Carspace</span>
           </LogoLink>
+        </h1>
+        <Nav>
           <NavList>
             <li>
               <NavLink to="/catalog">Catalog</NavLink>

@@ -1,7 +1,12 @@
 import React from "react";
 
 const FavoritesPage = (props) => {
-  return <div>FavoritesPage</div>;
+  return (
+    <main>
+      <h1 className="visually-hidden">Favorites Page</h1>
+      Favorites Page
+    </main>
+  );
 };
 
 export default FavoritesPage;

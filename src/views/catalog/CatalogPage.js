@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Container from "../../components/common/container/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdverts } from "../../redux/operations";
 import AdvertList from "../../components/catalog/advertList/AdvertList";
@@ -13,14 +12,7 @@ const CatalogPage = (props) => {
     dispatch(fetchAdverts());
   }, [dispatch]);
 
-  return (
-    <section>
-      <Container>
-        <h1>Catalog</h1>
-        {isLoading ? <></> : <AdvertList />}
-      </Container>
-    </section>
-  );
+  return <main>{isLoading ? <></> : <AdvertList />}</main>;
 };
 
 export default CatalogPage;
