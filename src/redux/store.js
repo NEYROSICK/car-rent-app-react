@@ -1,11 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { advertReducer } from "./advertSlice";
+import { filterReducer } from "./filterSlice";
 
-// const rootReducer = combineReducers({
-//   tasks: tasksReducer,
-//   filters: filtersReducer,
-// });
+const rootReducer = combineReducers({
+  adverts: advertReducer,
+  filters: filterReducer,
+});
 
 export const store = configureStore({
-  reducer: advertReducer,
+  reducer: rootReducer,
 });

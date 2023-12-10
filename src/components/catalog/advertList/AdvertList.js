@@ -1,11 +1,20 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { getAdverts } from "../../../redux/selectors";
+import { getAdverts, getBrand } from "../../../redux/selectors";
 import AdvertItem from "../advertItem/AdvertItem";
 import Container from "../../common/container/Container";
 
 const AdvertList = () => {
-  const adverts = useSelector(getAdverts);
+  let adverts = useSelector(getAdverts);
+  const brand = useSelector(getBrand);
+
+  const filterAdverts = () => {
+    if (brand !== "Select brand") {
+      return adverts.filter(({ make }) => make === brand);
+    }
+    return adverts;
+  };
+
+  adverts = filterAdverts();
 
   return (
     <section>
