@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IconChevron from "../icons/IconChevron";
 import { BrandContainer, BrandItem, BrandList, FiltersList, SelectBtn } from "./filters.styled";
 import brands from "../../../assets/carBrands.json";
@@ -10,6 +10,9 @@ import { nanoid } from "nanoid";
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
   const [clickedOption, setClickedOption] = useState("");
+  const dropdownRef = useRef(null);
+  const scrollToRef = useRef(null);
+
   const brand = useSelector(getBrand);
   const dispatch = useDispatch();
 
@@ -18,6 +21,12 @@ const Filters = () => {
     setClickedOption(e.target.innerText);
     setIsBrandOpen(!isBrandOpen);
   };
+
+  useEffect(() => {
+    if (isBrandOpen && scrollToRef.current) {
+      dropdownRef.current.scrollTop = scrollToRef.current.offsetTop - 14;
+    }
+  }, [isBrandOpen]);
 
   return (
     <FiltersList>
@@ -35,7 +44,7 @@ const Filters = () => {
         </SelectBtn>
         {isBrandOpen && (
           <BrandList>
-            <div>
+            <div ref={dropdownRef}>
               <ul>
                 {brands.map((brand) => (
                   <BrandItem
@@ -43,6 +52,7 @@ const Filters = () => {
                     clickedOption={clickedOption}
                     brand={brand}
                     key={nanoid()}
+                    ref={clickedOption === brand ? scrollToRef : null}
                   >
                     {brand}
                   </BrandItem>
