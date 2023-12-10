@@ -3,7 +3,7 @@ import Layout from "./components/layout/Layout";
 import { lazy } from "react";
 
 const MainPage = lazy(() => import("./views/main/MainPage"));
-const CatalogPage = lazy(() => import("./views/catalogue/CatalogPage"));
+const CatalogPage = lazy(() => import("./views/catalog/CatalogPage"));
 const FavoritesPage = lazy(() => import("./views/favorites/FavoritesPage"));
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPage />} />
-        <Route path="/catalog" element={<CatalogPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="catalog" element={<CatalogPage />} />
+        <Route path="favorites" element={<FavoritesPage />} />
       </Route>
     </Routes>
   );
