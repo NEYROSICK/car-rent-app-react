@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/car-rent-app-react/static/css/main.e6c13ad2.css",
-    "main.js": "/car-rent-app-react/static/js/main.4553ce14.js",
+    "main.js": "/car-rent-app-react/static/js/main.a1f1044e.js",
     "static/media/logo2.png": "/car-rent-app-react/static/media/logo2.ec9063ee132386ceee4c.png",
     "index.html": "/car-rent-app-react/index.html",
     "main.e6c13ad2.css.map": "/car-rent-app-react/static/css/main.e6c13ad2.css.map",
-    "main.4553ce14.js.map": "/car-rent-app-react/static/js/main.4553ce14.js.map"
+    "main.a1f1044e.js.map": "/car-rent-app-react/static/js/main.a1f1044e.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.4553ce14.js"
+    "static/js/main.a1f1044e.js"
   ]
 }
