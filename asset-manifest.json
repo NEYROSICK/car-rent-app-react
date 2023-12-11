@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/car-rent-app-react/static/css/main.ff5be91c.css",
-    "main.js": "/car-rent-app-react/static/js/main.0922f118.js",
+    "main.js": "/car-rent-app-react/static/js/main.fb3b8023.js",
     "static/js/346.688a759c.chunk.js": "/car-rent-app-react/static/js/346.688a759c.chunk.js",
     "static/js/578.9c547670.chunk.js": "/car-rent-app-react/static/js/578.9c547670.chunk.js",
     "static/js/850.bd5ae1ce.chunk.js": "/car-rent-app-react/static/js/850.bd5ae1ce.chunk.js",
@@ -11,13 +11,13 @@
     "static/media/afacad-v1-latin-500.woff2": "/car-rent-app-react/static/media/afacad-v1-latin-500.5d482915d203b2e721c1.woff2",
     "index.html": "/car-rent-app-react/index.html",
     "main.ff5be91c.css.map": "/car-rent-app-react/static/css/main.ff5be91c.css.map",
-    "main.0922f118.js.map": "/car-rent-app-react/static/js/main.0922f118.js.map",
+    "main.fb3b8023.js.map": "/car-rent-app-react/static/js/main.fb3b8023.js.map",
     "346.688a759c.chunk.js.map": "/car-rent-app-react/static/js/346.688a759c.chunk.js.map",
     "578.9c547670.chunk.js.map": "/car-rent-app-react/static/js/578.9c547670.chunk.js.map",
     "850.bd5ae1ce.chunk.js.map": "/car-rent-app-react/static/js/850.bd5ae1ce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ff5be91c.css",
-    "static/js/main.0922f118.js"
+    "static/js/main.fb3b8023.js"
   ]
 }
