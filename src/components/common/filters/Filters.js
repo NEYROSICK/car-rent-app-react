@@ -12,13 +12,17 @@ const Filters = () => {
   const [clickedOption, setClickedOption] = useState("");
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
+  const brandButton = useRef(null);
 
   const brand = useSelector(getBrand);
   const dispatch = useDispatch();
 
   const handleBrandClick = (e) => {
-    dispatch(changeFilter(e.target.innerText));
-    setClickedOption(e.target.innerText);
+    if (e.target.innerText !== clickedOption) {
+      dispatch(changeFilter(e.target.innerText));
+      setClickedOption(e.target.innerText);
+    }
+
     setIsBrandOpen(!isBrandOpen);
   };
 
@@ -26,6 +30,23 @@ const Filters = () => {
     if (isBrandOpen && scrollToRef.current) {
       dropdownRef.current.scrollTop = scrollToRef.current.offsetTop - 14;
     }
+  }, [isBrandOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        !brandButton.current.contains(e.target)
+      ) {
+        setIsBrandOpen(!isBrandOpen);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, [isBrandOpen]);
 
   return (
@@ -38,10 +59,12 @@ const Filters = () => {
             setIsBrandOpen(!isBrandOpen);
           }}
           isBrandOpen={isBrandOpen}
+          ref={brandButton}
         >
           <span>{brand}</span>
           <IconChevron />
         </SelectBtn>
+
         {isBrandOpen && (
           <BrandList>
             <div ref={dropdownRef}>
@@ -57,28 +80,6 @@ const Filters = () => {
                     {brand}
                   </BrandItem>
                 ))}
-                {/* <li>Buick</li>
-                <li>Volvo</li>
-                <li>HUMMER</li>
-                <li>Subaru</li>
-                <li>Mitsubishi</li>
-                <li>Nissan</li>
-                <li>Lincoln</li>
-                <li>GMC</li>
-                <li>Hyundai</li>
-                <li>MINI</li>
-                <li>Bentley</li>
-                <li>Mercedes-Benz</li>
-                <li>Aston Martin</li>
-                <li>Pontiac</li>
-                <li>Lamborghini</li>
-                <li>Audi</li>
-                <li>BMW</li>
-                <li>Chevrolet</li>
-                <li>Mercedes-Benz</li>
-                <li>Chrysler</li>
-                <li>Kia</li>
-                <li>Land</li> */}
               </ul>
             </div>
           </BrandList>
