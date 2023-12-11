@@ -1,14 +1,23 @@
 {
   "files": {
-    "main.css": "/car-rent-app-react/static/css/main.e6c13ad2.css",
-    "main.js": "/car-rent-app-react/static/js/main.a1f1044e.js",
-    "static/media/logo2.png": "/car-rent-app-react/static/media/logo2.ec9063ee132386ceee4c.png",
+    "main.css": "/car-rent-app-react/static/css/main.ff5be91c.css",
+    "main.js": "/car-rent-app-react/static/js/main.0922f118.js",
+    "static/js/346.688a759c.chunk.js": "/car-rent-app-react/static/js/346.688a759c.chunk.js",
+    "static/js/578.9c547670.chunk.js": "/car-rent-app-react/static/js/578.9c547670.chunk.js",
+    "static/js/850.bd5ae1ce.chunk.js": "/car-rent-app-react/static/js/850.bd5ae1ce.chunk.js",
+    "static/media/manrope-v15-cyrillic_latin-400.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-400.7ef652c29e757402aa5e.woff2",
+    "static/media/manrope-v15-cyrillic_latin-600.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-600.13f3bea54476f960f592.woff2",
+    "static/media/manrope-v15-cyrillic_latin-500.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-500.7ba3deb20e9068ed828f.woff2",
+    "static/media/afacad-v1-latin-500.woff2": "/car-rent-app-react/static/media/afacad-v1-latin-500.5d482915d203b2e721c1.woff2",
     "index.html": "/car-rent-app-react/index.html",
-    "main.e6c13ad2.css.map": "/car-rent-app-react/static/css/main.e6c13ad2.css.map",
-    "main.a1f1044e.js.map": "/car-rent-app-react/static/js/main.a1f1044e.js.map"
+    "main.ff5be91c.css.map": "/car-rent-app-react/static/css/main.ff5be91c.css.map",
+    "main.0922f118.js.map": "/car-rent-app-react/static/js/main.0922f118.js.map",
+    "346.688a759c.chunk.js.map": "/car-rent-app-react/static/js/346.688a759c.chunk.js.map",
+    "578.9c547670.chunk.js.map": "/car-rent-app-react/static/js/578.9c547670.chunk.js.map",
+    "850.bd5ae1ce.chunk.js.map": "/car-rent-app-react/static/js/850.bd5ae1ce.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.a1f1044e.js"
+    "static/css/main.ff5be91c.css",
+    "static/js/main.0922f118.js"
   ]
 }

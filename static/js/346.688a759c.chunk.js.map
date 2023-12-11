@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/346.688a759c.chunk.js","mappings":"iKAAA,MAIA,EAJkBA,IACTC,EAAAA,EAAAA,KAAA,QAAAC,SAAM,Y","sources":["views/main/MainPage.js"],"sourcesContent":["const MainPage = (props) => {\r\n  return <main>MainPage</main>;\r\n};\r\n\r\nexport default MainPage;\r\n"],"names":["props","_jsx","children"],"sourceRoot":""}
