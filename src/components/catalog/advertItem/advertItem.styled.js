@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+const deepEqual = (obj1, obj2) => {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+};
+
 export const AdvertCard = styled.li`
   position: relative;
 `;
@@ -21,8 +25,20 @@ export const FavoriteBtn = styled.button`
     width: 100%;
     height: 100%;
     stroke: var(--clr-brand);
-    fill: ${({ favorites, advert }) =>
-      !favorites.includes(advert) ? "transparent" : "var(--clr-brand)"};
+
+    /* fill: ${({ favorites, advert }) => {
+      return favorites.includes(advert) ? "var(--clr-brand)" : "transparent";
+    }}; */
+
+    fill: ${({ favorites, advert }) => {
+      if (favorites === null) {
+        return "transparent";
+      }
+      return favorites.some((favorite) => deepEqual(favorite, advert))
+        ? "var(--clr-brand)"
+        : "transparent";
+    }};
+
     transition: scale 0.3s, fill 0.3s;
   }
 
