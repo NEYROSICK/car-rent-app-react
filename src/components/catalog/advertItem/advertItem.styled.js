@@ -26,11 +26,11 @@ export const FavoriteBtn = styled.button`
     transition: scale 0.3s, fill 0.3s;
   }
 
-  & > svg:hover {
+  &:hover > svg {
     scale: 1.2;
   }
 
-  & > svg:active {
+  &:active > svg {
     scale: 0.9;
   }
 `;
