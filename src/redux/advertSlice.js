@@ -7,6 +7,7 @@ const advertSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
+    count: 0,
   },
   extraReducers: (builder) => {
     builder
@@ -17,6 +18,7 @@ const advertSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        state.count = action.payload.length;
       })
       .addCase(fetchAdverts.rejected, (state, action) => {
         state.isLoading = false;

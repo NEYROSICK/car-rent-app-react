@@ -3,28 +3,37 @@ import IconChevron from "../icons/IconChevron";
 import { BrandContainer, BrandItem, BrandList, FiltersList, SelectBtn } from "./filters.styled";
 import brands from "../../../assets/carBrands.json";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrand } from "../../../redux/selectors";
+import { getAdCount } from "../../../redux/selectors";
 import { changeFilter } from "../../../redux/filterSlice";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
+import { fetchAdverts } from "../../../redux/operations";
+import { defaultLimit } from "../../../redux/constants";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
-  const [clickedOption, setClickedOption] = useState("");
+  const [clickedOption, setClickedOption] = useState("Select brand");
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
   const brandButton = useRef(null);
 
-  const brand = useSelector(getBrand);
   const dispatch = useDispatch();
+  const count = useSelector(getAdCount);
 
   const handleBrandClick = (e) => {
     if (e.target.innerText !== clickedOption) {
-      dispatch(changeFilter(e.target.innerText));
       setClickedOption(e.target.innerText);
     }
 
     setIsBrandOpen(!isBrandOpen);
+  };
+
+  const handleSearchClick = () => {
+    if (count === defaultLimit) {
+      dispatch(fetchAdverts({}));
+    }
+
+    dispatch(changeFilter(clickedOption));
   };
 
   useEffect(() => {
@@ -62,7 +71,7 @@ const Filters = () => {
           isBrandOpen={isBrandOpen}
           ref={brandButton}
         >
-          <span>{brand}</span>
+          <span>{clickedOption}</span>
           <IconChevron />
         </SelectBtn>
 
@@ -86,7 +95,9 @@ const Filters = () => {
           </BrandList>
         )}
       </BrandContainer>
-      <Button variant="search">Search</Button>
+      <Button variant="search" handleClick={handleSearchClick}>
+        Search
+      </Button>
     </FiltersList>
   );
 };

@@ -8,7 +8,7 @@ const AdvertList = () => {
   const brand = useSelector(getBrand);
 
   const filterAdverts = () => {
-    if (brand !== "Select brand") {
+    if (brand) {
       return adverts.filter(({ make }) => make === brand);
     }
     return adverts;
