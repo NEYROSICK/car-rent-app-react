@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { getAdverts, getBrand } from "../../../redux/selectors";
 import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
+import { AdvertListSection, CardList } from "./advertList.styled";
 
 const AdvertList = () => {
   let adverts = useSelector(getAdverts);
@@ -17,16 +18,16 @@ const AdvertList = () => {
   adverts = filterAdverts();
 
   return (
-    <section>
+    <AdvertListSection>
       <Container>
         <h2 className="visually-hidden">Car advertisement list</h2>
-        <ul>
+        <CardList>
           {adverts.map((advert) => (
             <Card item={advert} key={advert.id} />
           ))}
-        </ul>
+        </CardList>
       </Container>
-    </section>
+    </AdvertListSection>
   );
 };
 

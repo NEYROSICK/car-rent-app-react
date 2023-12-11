@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export const HeaderSection = styled.header`
   background-color: var(--clr-bcg-header);
   color: var(--clr-primary-inv);
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 export const HeaderContainer = styled.header`

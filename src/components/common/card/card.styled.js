@@ -6,6 +6,7 @@ const deepEqual = (obj1, obj2) => {
 
 export const CardContainer = styled.li`
   position: relative;
+  width: 274px;
 `;
 
 export const FavoriteBtn = styled.button`
@@ -45,4 +46,46 @@ export const FavoriteBtn = styled.button`
   &:active > svg {
     scale: 0.9;
   }
+`;
+
+export const ImgContainer = styled.div`
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 14px;
+`;
+
+export const CarImg = styled.img`
+  object-fit: cover;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  margin-bottom: 8px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--clr-primary);
+
+  & > h3 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+`;
+
+export const CardTitle = styled.h3`
+  flex-grow: 1;
+`;
+
+export const Model = styled.span`
+  color: var(--clr-brand);
+`;
+
+export const AdditionalInfo = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 4px;
+  margin-bottom: 28px;
+  color: var(--clr-secondary);
 `;

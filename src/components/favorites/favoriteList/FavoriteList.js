@@ -3,21 +3,22 @@ import { useSelector } from "react-redux";
 import { getFavorites } from "../../../redux/selectors";
 import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
+import { CardList, FavoriteListSection } from "./favoriteList.styled";
 
 const FavoriteList = () => {
   // const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
 
   return (
-    <section>
+    <FavoriteListSection>
       <Container>
-        <ul>
+        <CardList>
           {favorites.map((item) => (
             <Card item={item} key={item.id} />
           ))}
-        </ul>
+        </CardList>
       </Container>
-    </section>
+    </FavoriteListSection>
   );
 };
 

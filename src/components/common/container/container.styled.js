@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 
 export const StyledContainer = styled.div`
   width: 100%;
-  max-width: 320px;
-  padding: 0 20px;
+  max-width: 1215px;
+  padding: 0 16px;
   margin: 0 auto;
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     max-width: 768px;
     padding: 0 32px;
   }
@@ -18,5 +18,5 @@ export const StyledContainer = styled.div`
 
   @media (min-width: 1440px) {
     max-width: 1440px;
-  }
+  } */
 `;

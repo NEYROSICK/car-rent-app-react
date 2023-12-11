@@ -2,7 +2,16 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "../../common/modal/Modal";
 import { createPortal } from "react-dom";
-import { CardContainer, FavoriteBtn } from "./card.styled";
+import {
+  AdditionalInfo,
+  CarImg,
+  CardContainer,
+  CardTitle,
+  FavoriteBtn,
+  ImgContainer,
+  Model,
+  TitleContainer,
+} from "./card.styled";
 import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../../redux/favoriteSlice";
@@ -48,29 +57,28 @@ const Card = ({ item }) => {
         <IconHeart />
       </FavoriteBtn>
 
-      <img src={img} alt={brand} width={200} />
-
-      <div>
-        <h3>
+      <ImgContainer>
+        <CarImg src={img} alt={brand} width={274} height={274} />
+      </ImgContainer>
+      <TitleContainer>
+        <CardTitle>
           {brand}
-          <span> {model}</span>, {year}
-        </h3>
+          <Model> {model}</Model>, {year}
+        </CardTitle>
         <span>{rentalPrice}</span>
-      </div>
+      </TitleContainer>
 
-      <ul>
+      <AdditionalInfo>
         <li>{address.split(", ")[1]}</li>
         <li>{address.split(", ")[2]}</li>
         <li>{rentalCompany}</li>
-        <li>Premium {type}</li>
+        <li>{type}</li>
         <li>{brand}</li>
         <li>{id}</li>
-        <li>{accessories[2]}</li>
-      </ul>
+        <li>{accessories[2].split(" ")[0]}</li>
+      </AdditionalInfo>
 
-      <Button onClick={handleModalOpen} variant="primary">
-        Learn more
-      </Button>
+      <Button onClick={handleModalOpen}>Learn more</Button>
 
       {isModalOpen &&
         createPortal(
