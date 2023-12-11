@@ -4,7 +4,7 @@ const deepEqual = (obj1, obj2) => {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 };
 
-export const AdvertCard = styled.li`
+export const CardContainer = styled.li`
   position: relative;
 `;
 
@@ -26,15 +26,11 @@ export const FavoriteBtn = styled.button`
     height: 100%;
     stroke: var(--clr-brand);
 
-    /* fill: ${({ favorites, advert }) => {
-      return favorites.includes(advert) ? "var(--clr-brand)" : "transparent";
-    }}; */
-
-    fill: ${({ favorites, advert }) => {
+    fill: ${({ favorites, item }) => {
       if (favorites === null) {
         return "transparent";
       }
-      return favorites.some((favorite) => deepEqual(favorite, advert))
+      return favorites.some((favorite) => deepEqual(favorite, item))
         ? "var(--clr-brand)"
         : "transparent";
     }};

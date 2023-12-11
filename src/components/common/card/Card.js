@@ -2,14 +2,14 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "../../common/modal/Modal";
 import { createPortal } from "react-dom";
-import { AdvertCard, FavoriteBtn } from "./advertItem.styled";
+import { CardContainer, FavoriteBtn } from "./card.styled";
 import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../../redux/favoriteSlice";
 import { getFavorites } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
 
-const AdvertItem = ({ advert }) => {
+const Card = ({ item }) => {
   const {
     img,
     make: brand,
@@ -21,7 +21,7 @@ const AdvertItem = ({ advert }) => {
     type,
     id,
     accessories,
-  } = advert;
+  } = item;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRoot = document.getElementById("modal");
@@ -37,12 +37,12 @@ const AdvertItem = ({ advert }) => {
   };
 
   return (
-    <AdvertCard>
+    <CardContainer>
       <FavoriteBtn
         favorites={favorites}
-        advert={advert}
+        item={item}
         onClick={() => {
-          handleFavoriteToggle(advert);
+          handleFavoriteToggle(item);
         }}
       >
         <IconHeart />
@@ -74,13 +74,13 @@ const AdvertItem = ({ advert }) => {
 
       {isModalOpen &&
         createPortal(
-          <Modal advert={advert} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />,
+          <Modal item={item} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />,
           modalRoot
         )}
-    </AdvertCard>
+    </CardContainer>
   );
 };
 
-AdvertItem.propTypes = { advert: PropTypes.object.isRequired };
+Card.propTypes = { item: PropTypes.object.isRequired };
 
-export default AdvertItem;
+export default Card;

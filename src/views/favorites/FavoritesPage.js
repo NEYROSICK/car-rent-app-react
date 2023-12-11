@@ -1,8 +1,9 @@
+import FavoriteList from "../../components/favorites/favoriteList/FavoriteList";
+
 const FavoritesPage = (props) => {
   return (
     <main>
-      <h1 className="visually-hidden">Favorites Page</h1>
-      Favorites Page
+      <FavoriteList />
     </main>
   );
 };
