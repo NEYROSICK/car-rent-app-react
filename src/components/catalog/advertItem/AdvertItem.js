@@ -7,6 +7,7 @@ import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../../redux/favoriteSlice";
 import { getFavorites } from "../../../redux/selectors";
+import Button from "../../common/button/Button";
 
 const AdvertItem = ({ advert }) => {
   const {
@@ -67,7 +68,9 @@ const AdvertItem = ({ advert }) => {
         <li>{accessories[2]}</li>
       </ul>
 
-      <button onClick={handleModalOpen}>Learn more</button>
+      <Button onClick={handleModalOpen} variant="primary">
+        Learn more
+      </Button>
 
       {isModalOpen &&
         createPortal(

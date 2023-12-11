@@ -3,6 +3,9 @@ import styled from "@emotion/styled";
 export const FiltersList = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+
+  gap: 18px;
 `;
 
 export const BrandContainer = styled.div`

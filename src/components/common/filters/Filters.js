@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBrand } from "../../../redux/selectors";
 import { changeFilter } from "../../../redux/filterSlice";
 import { nanoid } from "nanoid";
+import Button from "../button/Button";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
@@ -85,6 +86,7 @@ const Filters = () => {
           </BrandList>
         )}
       </BrandContainer>
+      <Button variant="search">Search</Button>
     </FiltersList>
   );
 };
