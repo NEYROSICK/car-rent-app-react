@@ -95,7 +95,7 @@ const Filters = () => {
           </BrandList>
         )}
       </BrandContainer>
-      <Button variant="search" handleClick={handleSearchClick}>
+      <Button variant="search" onClick={handleSearchClick}>
         Search
       </Button>
     </FiltersList>
