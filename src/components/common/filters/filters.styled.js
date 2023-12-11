@@ -54,6 +54,7 @@ export const BrandList = styled.div`
   left: 0;
   height: 272px;
   width: 224px;
+  z-index: 2;
 
   padding: 14px 8px;
 
