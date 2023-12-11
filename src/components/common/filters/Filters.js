@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import IconChevron from "../icons/IconChevron";
-import { BrandContainer, BrandItem, BrandList, FiltersList, SelectBtn } from "./filters.styled";
+import {
+  BrandContainer,
+  BrandItem,
+  BrandList,
+  FiltersContainer,
+  FiltersList,
+  SelectBtn,
+} from "./filters.styled";
 import brands from "../../../assets/carBrands.json";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdCount } from "../../../redux/selectors";
@@ -9,6 +16,7 @@ import { nanoid } from "nanoid";
 import Button from "../button/Button";
 import { fetchAdverts } from "../../../redux/operations";
 import { defaultLimit } from "../../../redux/constants";
+import Container from "../container/Container";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
@@ -60,45 +68,49 @@ const Filters = () => {
   }, [isBrandOpen]);
 
   return (
-    <FiltersList>
-      <BrandContainer>
-        <p>Car brand</p>
+    <FiltersContainer>
+      <Container>
+        <FiltersList>
+          <BrandContainer>
+            <p>Car brand</p>
 
-        <SelectBtn
-          onClick={() => {
-            setIsBrandOpen(!isBrandOpen);
-          }}
-          isBrandOpen={isBrandOpen}
-          ref={brandButton}
-        >
-          <span>{clickedOption}</span>
-          <IconChevron />
-        </SelectBtn>
+            <SelectBtn
+              onClick={() => {
+                setIsBrandOpen(!isBrandOpen);
+              }}
+              isBrandOpen={isBrandOpen}
+              ref={brandButton}
+            >
+              <span>{clickedOption}</span>
+              <IconChevron />
+            </SelectBtn>
 
-        {isBrandOpen && (
-          <BrandList>
-            <div ref={dropdownRef}>
-              <ul>
-                {brands.map((brand) => (
-                  <BrandItem
-                    onClick={handleBrandClick}
-                    clickedOption={clickedOption}
-                    brand={brand}
-                    key={nanoid()}
-                    ref={clickedOption === brand ? scrollToRef : null}
-                  >
-                    {brand}
-                  </BrandItem>
-                ))}
-              </ul>
-            </div>
-          </BrandList>
-        )}
-      </BrandContainer>
-      <Button variant="search" onClick={handleSearchClick}>
-        Search
-      </Button>
-    </FiltersList>
+            {isBrandOpen && (
+              <BrandList>
+                <div ref={dropdownRef}>
+                  <ul>
+                    {brands.map((brand) => (
+                      <BrandItem
+                        onClick={handleBrandClick}
+                        clickedOption={clickedOption}
+                        brand={brand}
+                        key={nanoid()}
+                        ref={clickedOption === brand ? scrollToRef : null}
+                      >
+                        {brand}
+                      </BrandItem>
+                    ))}
+                  </ul>
+                </div>
+              </BrandList>
+            )}
+          </BrandContainer>
+          <Button variant="search" onClick={handleSearchClick}>
+            Search
+          </Button>
+        </FiltersList>
+      </Container>
+    </FiltersContainer>
   );
 };
 

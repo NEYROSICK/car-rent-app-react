@@ -1,28 +1,36 @@
-import { HeaderSection, LogoLink, Nav, NavList } from "./header.styled";
+import { HeaderContainer, HeaderSection, LogoLink, Nav, NavList, Title } from "./header.styled";
 import { NavLink } from "react-router-dom";
 import Container from "../container/Container";
-import Logo from "../../../images/logo.png";
+import Logo from "../icons/Logo";
+import IconCar from "../icons/IconCar";
+import IconHeart from "../icons/IconHeart";
 
 const Header = () => {
   return (
     <HeaderSection>
       <Container>
-        <h1>
-          <LogoLink to="/">
-            <img src={Logo} alt="Carspace Logo" />
-            <span>Carspace</span>
-          </LogoLink>
-        </h1>
-        <Nav>
-          <NavList>
-            <li>
-              <NavLink to="/catalog">Catalog</NavLink>
-            </li>
-            <li>
-              <NavLink to="/favorites">Favorites</NavLink>
-            </li>
-          </NavList>
-        </Nav>
+        <HeaderContainer>
+          <Title>
+            <LogoLink to="/">
+              <Logo />
+              Carspace
+            </LogoLink>
+          </Title>
+          <Nav>
+            <NavList>
+              <li>
+                <NavLink to="/catalog">
+                  Catalog <IconCar />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/favorites">
+                  Favorites <IconHeart />
+                </NavLink>
+              </li>
+            </NavList>
+          </Nav>
+        </HeaderContainer>
       </Container>
     </HeaderSection>
   );
