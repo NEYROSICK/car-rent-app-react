@@ -7,7 +7,17 @@ const advertSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
-    count: 0,
+    count: 12,
+    page: 1,
+  },
+  reducers: {
+    // resetAdvertState(state) {
+    //   return { items: [], isLoading: false, error: null, count: 12 };
+    // },
+    setPage(state, action) {
+      console.log(action.payload);
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -17,7 +27,11 @@ const advertSlice = createSlice({
       .addCase(fetchAdverts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        if (state.page === 1) {
+          state.items = action.payload;
+        } else {
+          state.items = [...state.items, ...action.payload];
+        }
         state.count = action.payload.length;
       })
       .addCase(fetchAdverts.rejected, (state, action) => {
@@ -27,5 +41,5 @@ const advertSlice = createSlice({
   },
 });
 
-export const { fetchingInProgress, fetchingSuccess, fetchingError } = advertSlice.actions;
+export const { fetchingInProgress, fetchingSuccess, fetchingError, setPage } = advertSlice.actions;
 export const advertReducer = advertSlice.reducer;

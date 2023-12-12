@@ -88,4 +88,8 @@ export const AdditionalInfo = styled.ul`
   row-gap: 4px;
   margin-bottom: 28px;
   color: var(--clr-secondary);
+
+  & > li {
+    align-items: flex-end;
+  }
 `;

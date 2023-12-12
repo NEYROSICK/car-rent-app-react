@@ -12,6 +12,6 @@ const Button = ({ children, variant, href, onClick }) => {
   );
 };
 
-Button.propTypes = { variant: PropTypes.string.isRequired };
+Button.propTypes = { variant: PropTypes.string };
 
 export default Button;

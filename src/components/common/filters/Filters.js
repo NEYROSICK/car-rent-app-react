@@ -11,7 +11,7 @@ import {
 import brands from "../../../assets/carBrands.json";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdCount } from "../../../redux/selectors";
-import { changeFilter } from "../../../redux/filterSlice";
+import { setFilter } from "../../../redux/filterSlice";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
 import { fetchAdverts } from "../../../redux/operations";
@@ -37,11 +37,12 @@ const Filters = () => {
   };
 
   const handleSearchClick = () => {
-    if (count === defaultLimit) {
+    if (count === defaultLimit && clickedOption !== "Select brand") {
       dispatch(fetchAdverts({}));
     }
-
-    dispatch(changeFilter(clickedOption));
+    if (clickedOption !== "Select brand") {
+      dispatch(setFilter(clickedOption));
+    }
   };
 
   useEffect(() => {

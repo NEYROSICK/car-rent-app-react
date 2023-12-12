@@ -59,6 +59,20 @@
   src: url("./fonts/afacad-v1-latin-500.woff2") format("woff2");
 }
 
+@font-face {
+  font-display: swap;
+  font-family: "Archivo Black";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/archivo-black-v21-latin-regular.woff2") format("woff2");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   width: 100vw;
   margin: 0;
