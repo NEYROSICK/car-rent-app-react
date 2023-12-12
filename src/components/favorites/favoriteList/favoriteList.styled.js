@@ -9,3 +9,10 @@ export const CardList = styled.ul`
   flex-wrap: wrap;
   gap: 29px;
 `;
+
+export const Message = styled.p`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+`;

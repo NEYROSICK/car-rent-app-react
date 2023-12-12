@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import {
   AdditionalInfo,
   Backdrop,
+  Brand,
   BtnClose,
+  ConditionList,
   Description,
   Img,
   ModalContainer,
@@ -13,6 +15,7 @@ import {
 import { Model } from "../card/card.styled";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
+import IconCross from "../icons/IconCross";
 
 const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
   const {
@@ -29,6 +32,8 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
     accessories,
     functionalities,
     rentalConditions,
+    mileage,
+    rentalPrice,
   } = item;
 
   const handleCloseClick = (e) => {
@@ -56,7 +61,9 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
   return (
     <Backdrop onClick={handleCloseClick}>
       <ModalContainer>
-        <BtnClose onClick={handleCloseClick}>X</BtnClose>
+        <BtnClose onClick={handleCloseClick}>
+          <IconCross />
+        </BtnClose>
         <Img src={img} alt={brand} width={461} height={248} />
         <ModalTitle>
           {brand}
@@ -86,13 +93,25 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
 
         <ModalSecondaryTitle>Rental Conditions: </ModalSecondaryTitle>
 
-        <ul>
-          {rentalConditions.split("\n").map((element) => (
-            <li key={nanoid}>{element}</li>
-          ))}
-          <li>Mileage: </li>
-          <li>Price</li>
-        </ul>
+        <ConditionList>
+          {rentalConditions.split("\n").map((element, index) =>
+            index === 0 ? (
+              <li key={nanoid}>
+                {element.split(" ")[0] + " "}
+                {element.split(" ")[1]}
+                <Brand> {element.split(": ")[1]}</Brand>
+              </li>
+            ) : (
+              <li key={nanoid}>{element}</li>
+            )
+          )}
+          <li>
+            Mileage: <Brand>{mileage}</Brand>
+          </li>
+          <li>
+            Price: <Brand>{rentalPrice}</Brand>
+          </li>
+        </ConditionList>
 
         <Button variant="rental" href="tel:+380730000000">
           Rental car

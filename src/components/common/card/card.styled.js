@@ -7,6 +7,7 @@ const deepEqual = (obj1, obj2) => {
 export const CardContainer = styled.li`
   position: relative;
   width: 274px;
+  align-self: flex-end;
 `;
 
 export const FavoriteBtn = styled.button`
@@ -49,6 +50,7 @@ export const FavoriteBtn = styled.button`
 `;
 
 export const ImgContainer = styled.div`
+  align-self: flex-start;
   overflow: hidden;
   border-radius: 14px;
   margin-bottom: 14px;
@@ -88,8 +90,4 @@ export const AdditionalInfo = styled.ul`
   row-gap: 4px;
   margin-bottom: 28px;
   color: var(--clr-secondary);
-
-  & > li {
-    align-items: flex-end;
-  }
 `;

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getFavorites } from "../../../redux/selectors";
 import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
-import { CardList, FavoriteListSection } from "./favoriteList.styled";
+import { CardList, FavoriteListSection, Message } from "./favoriteList.styled";
 
 const FavoriteList = () => {
   // const dispatch = useDispatch();
@@ -12,11 +12,15 @@ const FavoriteList = () => {
   return (
     <FavoriteListSection>
       <Container>
-        <CardList>
-          {favorites.map((item) => (
-            <Card item={item} key={item.id} />
-          ))}
-        </CardList>
+        {favorites.length ? (
+          <CardList>
+            {favorites.map((item) => (
+              <Card item={item} key={item.id} />
+            ))}
+          </CardList>
+        ) : (
+          <Message>There are no favorite adverts. Try to add some ;)</Message>
+        )}
       </Container>
     </FavoriteListSection>
   );

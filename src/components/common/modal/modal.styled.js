@@ -17,7 +17,6 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div`
   position: relative;
   width: 541px;
-  height: 752px;
 
   padding: 40px;
 
@@ -32,12 +31,22 @@ export const BtnClose = styled.button`
   width: 24px;
   height: 24px;
 
+  padding: 0;
+  margin: 0;
   font-weight: bold;
 
   background: none;
   border: none;
-
   cursor: pointer;
+
+  svg {
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+
+  &:hover > svg {
+    transform: rotate(180deg);
+  }
 `;
 
 export const Img = styled.img`
@@ -64,6 +73,8 @@ export const AdditionalInfo = styled.ul`
   margin-bottom: 28px;
   color: var(--clr-secondary);
   margin-bottom: 14px;
+
+  ${({ accessories }) => accessories && `margin-bottom: 24px;`}
 `;
 
 export const Description = styled.p`
@@ -79,6 +90,24 @@ export const ModalSecondaryTitle = styled.h4`
   font-weight: 500;
   line-height: 20px;
   margin-bottom: 8px;
+`;
 
-  ${({ accessories }) => accessories && `margin-bottom: 24px;`}
+export const ConditionList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  letter-spacing: -0.24px;
+
+  & > li {
+    padding: 7px 14px;
+    border-radius: 35px;
+    background-color: var(--clr-bcg-filter);
+  }
+`;
+
+export const Brand = styled.span`
+  font-weight: 600;
+  color: var(--clr-brand);
 `;
