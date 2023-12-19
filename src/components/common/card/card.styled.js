@@ -5,9 +5,10 @@ const deepEqual = (obj1, obj2) => {
 };
 
 export const CardContainer = styled.li`
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 274px;
-  align-self: flex-end;
 `;
 
 export const FavoriteBtn = styled.button`
@@ -62,6 +63,7 @@ export const CarImg = styled.img`
 
 export const TitleContainer = styled.div`
   display: flex;
+  flex-grow: 1;
   margin-bottom: 8px;
 
   font-size: 16px;

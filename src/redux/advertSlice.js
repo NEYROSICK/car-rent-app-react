@@ -15,7 +15,6 @@ const advertSlice = createSlice({
     //   return { items: [], isLoading: false, error: null, count: 12 };
     // },
     setPage(state, action) {
-      console.log(action.payload);
       state.page = action.payload;
     },
   },
