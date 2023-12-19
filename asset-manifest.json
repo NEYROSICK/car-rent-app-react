@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/car-rent-app-react/static/css/main.0b613ca6.css",
-    "main.js": "/car-rent-app-react/static/js/main.a691b732.js",
-    "static/js/160.6e2276e6.chunk.js": "/car-rent-app-react/static/js/160.6e2276e6.chunk.js",
-    "static/js/52.24c6dbf6.chunk.js": "/car-rent-app-react/static/js/52.24c6dbf6.chunk.js",
-    "static/js/850.f1f7f1ad.chunk.js": "/car-rent-app-react/static/js/850.f1f7f1ad.chunk.js",
+    "main.js": "/car-rent-app-react/static/js/main.6321ea5f.js",
+    "static/js/856.3724fa11.chunk.js": "/car-rent-app-react/static/js/856.3724fa11.chunk.js",
+    "static/js/52.5b759549.chunk.js": "/car-rent-app-react/static/js/52.5b759549.chunk.js",
+    "static/js/850.333a1f0b.chunk.js": "/car-rent-app-react/static/js/850.333a1f0b.chunk.js",
     "static/media/wallpaper.jpg": "/car-rent-app-react/static/media/wallpaper.d4aed08257ea84d550ca.jpg",
     "static/media/manrope-v15-cyrillic_latin-400.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-400.7ef652c29e757402aa5e.woff2",
     "static/media/manrope-v15-cyrillic_latin-600.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-600.13f3bea54476f960f592.woff2",
@@ -13,13 +13,13 @@
     "static/media/afacad-v1-latin-500.woff2": "/car-rent-app-react/static/media/afacad-v1-latin-500.5d482915d203b2e721c1.woff2",
     "index.html": "/car-rent-app-react/index.html",
     "main.0b613ca6.css.map": "/car-rent-app-react/static/css/main.0b613ca6.css.map",
-    "main.a691b732.js.map": "/car-rent-app-react/static/js/main.a691b732.js.map",
-    "160.6e2276e6.chunk.js.map": "/car-rent-app-react/static/js/160.6e2276e6.chunk.js.map",
-    "52.24c6dbf6.chunk.js.map": "/car-rent-app-react/static/js/52.24c6dbf6.chunk.js.map",
-    "850.f1f7f1ad.chunk.js.map": "/car-rent-app-react/static/js/850.f1f7f1ad.chunk.js.map"
+    "main.6321ea5f.js.map": "/car-rent-app-react/static/js/main.6321ea5f.js.map",
+    "856.3724fa11.chunk.js.map": "/car-rent-app-react/static/js/856.3724fa11.chunk.js.map",
+    "52.5b759549.chunk.js.map": "/car-rent-app-react/static/js/52.5b759549.chunk.js.map",
+    "850.333a1f0b.chunk.js.map": "/car-rent-app-react/static/js/850.333a1f0b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0b613ca6.css",
-    "static/js/main.a691b732.js"
+    "static/js/main.6321ea5f.js"
   ]
 }
