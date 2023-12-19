@@ -9,10 +9,19 @@ export const CardContainer = styled.li`
   flex-direction: column;
   position: relative;
   width: 274px;
+
+  div > img {
+    transition: transform 0.3s;
+  }
+
+  &:hover div > img {
+    transform: scale(1.1);
+  }
 `;
 
 export const FavoriteBtn = styled.button`
   position: absolute;
+  z-index: 1;
   top: 14px;
   right: 14px;
   width: var(--svg-size-heart);
@@ -51,7 +60,8 @@ export const FavoriteBtn = styled.button`
 `;
 
 export const ImgContainer = styled.div`
-  align-self: flex-start;
+  width: 274px;
+  height: 274px;
   overflow: hidden;
   border-radius: 14px;
   margin-bottom: 14px;
@@ -92,4 +102,20 @@ export const AdditionalInfo = styled.ul`
   row-gap: 4px;
   margin-bottom: 28px;
   color: var(--clr-secondary);
+
+  & > li {
+    position: relative;
+  }
+
+  & > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -6px;
+
+    display: block;
+    width: 0.9px;
+    height: 16px;
+    background-color: var(--clr-bcg-list-decor);
+  }
 `;

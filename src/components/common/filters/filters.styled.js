@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const FiltersContainer = styled.div`
-  padding: 50px 0;
+  padding-bottom: 50px;
 `;
 
 export const FiltersList = styled.div`

@@ -98,7 +98,11 @@ const Card = ({ item }) => {
 
       {isModalOpen &&
         createPortal(
-          <Modal item={item} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />,
+          <Modal
+            item={(item = { ...item, img: imagePath })}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />,
           modalRoot
         )}
     </CardContainer>

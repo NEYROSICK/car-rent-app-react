@@ -7,7 +7,7 @@ import { defaultLimit } from "../../redux/constants";
 import { getAdCount, getPage } from "../../redux/selectors";
 import { setFilter } from "../../redux/filterSlice";
 import { setPage } from "../../redux/advertSlice";
-import { BtnPagination } from "./catalogPage.styled";
+import { BtnPagination, Main } from "./catalogPage.styled";
 const CatalogPage = (props) => {
   const dispatch = useDispatch();
   const count = useSelector(getAdCount);
@@ -23,10 +23,10 @@ const CatalogPage = (props) => {
 
   useEffect(() => {
     dispatch(setPage(1));
-  }, []);
+  }, [dispatch]);
 
   return (
-    <main>
+    <Main>
       <Filters />
       <AdvertList />
       {count === defaultLimit && (
@@ -38,7 +38,7 @@ const CatalogPage = (props) => {
           Load more
         </BtnPagination>
       )}
-    </main>
+    </Main>
   );
 };
 

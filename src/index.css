@@ -6,6 +6,7 @@
   --clr-bcg-filter: #f7f7fb;
   --clr-bcg-scrollbar: rgba(18, 20, 23, 0.05);
   --clr-bcg-scrollbar-hover: #ececec;
+  --clr-bcg-list-decor: rgba(18, 20, 23, 0.1);
 
   /*text colors*/
   --clr-primary: #121417;

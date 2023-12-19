@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
 
+export const Main = styled.main`
+  padding: 50px 0;
+`;
+
 export const BtnPagination = styled.button`
-  width: 180px;
-  height: 44px;
+  width: 210px;
+  height: 48px;
 
   display: block;
-  margin: 0 auto 50px auto;
-  /* margin-bottom: 50px; */
+  margin: 0 auto;
 
   font-size: 16px;
   font-style: normal;
@@ -16,7 +19,7 @@ export const BtnPagination = styled.button`
 
   background: transparent;
   border: 2px solid transparent;
-  border-radius: 38px;
+  border-radius: 12px;
   cursor: pointer;
   transition: border-color 0.3s;
 
