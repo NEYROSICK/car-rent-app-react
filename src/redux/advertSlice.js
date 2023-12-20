@@ -11,11 +11,11 @@ const advertSlice = createSlice({
     page: 1,
   },
   reducers: {
-    // resetAdvertState(state) {
-    //   return { items: [], isLoading: false, error: null, count: 12 };
-    // },
     setPage(state, action) {
       state.page = action.payload;
+    },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -40,5 +40,6 @@ const advertSlice = createSlice({
   },
 });
 
-export const { fetchingInProgress, fetchingSuccess, fetchingError, setPage } = advertSlice.actions;
+export const { fetchingInProgress, fetchingSuccess, fetchingError, setPage, setIsLoading } =
+  advertSlice.actions;
 export const advertReducer = advertSlice.reducer;

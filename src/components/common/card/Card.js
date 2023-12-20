@@ -15,12 +15,13 @@ import {
 import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../../redux/favoriteSlice";
-import { getFavorites } from "../../../redux/selectors";
+import { getFavorites, getIsLoading } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
-import wallpaper from "../../../images/wallpaper.jpg";
+import imgPlaceholder from "../../../images/wallpaper.jpg";
 import axios from "axios";
+import { setIsLoading } from "../../../redux/advertSlice";
 
-const Card = ({ item }) => {
+const Card = ({ item, onImageLoad }) => {
   const {
     img,
     make: brand,
@@ -35,7 +36,8 @@ const Card = ({ item }) => {
   } = item;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [imagePath, setImagePath] = useState(null);
+  const [imagePath, setImagePath] = useState(imgPlaceholder);
+  // const [isImageLoaded, setIsImageLoaded] = useState(false);
   const modalRoot = document.getElementById("modal");
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
@@ -46,12 +48,27 @@ const Card = ({ item }) => {
         const data = await axios.get(img);
         setImagePath(data.config.url);
       } catch (error) {
-        setImagePath(wallpaper);
+        setImagePath(imgPlaceholder);
       }
+      // setIsImageLoaded(true);
+      onImageLoad();
     };
 
     checkUrlValidity();
-  }, [img]);
+  }, [img, dispatch]);
+
+  // const checkUrlValidity = async () => {
+  //   try {
+  //     const data = await axios.get(img);
+  //     console.log("hello", data.config.url);
+  //     imagePath = data.config.url;
+  //     console.log(imagePath);
+  //   } catch (error) {
+  //     imagePath = imgPlaceholder;
+  //   }
+  // };
+
+  // checkUrlValidity();
 
   const handleFavoriteToggle = (item) => {
     dispatch(toggleFavorite(item));
@@ -61,6 +78,7 @@ const Card = ({ item }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+  // if (isImageLoaded) {
   return (
     <CardContainer>
       <FavoriteBtn
@@ -108,6 +126,7 @@ const Card = ({ item }) => {
     </CardContainer>
   );
 };
+// };
 
 Card.propTypes = { item: PropTypes.object.isRequired };
 

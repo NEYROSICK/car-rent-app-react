@@ -2,13 +2,14 @@ import styled from "@emotion/styled";
 
 export const Main = styled.main`
   padding: 50px 0;
+  min-height: calc(100% - 92px);
 `;
 
 export const BtnPagination = styled.button`
   width: 210px;
   height: 48px;
 
-  display: block;
+  display: ${({ areAllLoaded }) => (areAllLoaded ? "block" : "none")};
   margin: 0 auto;
 
   font-size: 16px;
