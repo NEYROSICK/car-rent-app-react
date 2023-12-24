@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/car-rent-app-react/static/css/main.ff906394.css",
-    "main.js": "/car-rent-app-react/static/js/main.3e40aee7.js",
+    "main.js": "/car-rent-app-react/static/js/main.3e5488b5.js",
     "static/js/856.3724fa11.chunk.js": "/car-rent-app-react/static/js/856.3724fa11.chunk.js",
-    "static/js/804.cbac3be5.chunk.js": "/car-rent-app-react/static/js/804.cbac3be5.chunk.js",
-    "static/js/850.18bece4e.chunk.js": "/car-rent-app-react/static/js/850.18bece4e.chunk.js",
+    "static/js/412.038d949a.chunk.js": "/car-rent-app-react/static/js/412.038d949a.chunk.js",
+    "static/js/850.279261a8.chunk.js": "/car-rent-app-react/static/js/850.279261a8.chunk.js",
     "static/media/wallpaper.jpg": "/car-rent-app-react/static/media/wallpaper.d4aed08257ea84d550ca.jpg",
     "static/media/manrope-v15-cyrillic_latin-400.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-400.7ef652c29e757402aa5e.woff2",
     "static/media/manrope-v15-cyrillic_latin-600.woff2": "/car-rent-app-react/static/media/manrope-v15-cyrillic_latin-600.13f3bea54476f960f592.woff2",
@@ -13,13 +13,13 @@
     "static/media/afacad-v1-latin-500.woff2": "/car-rent-app-react/static/media/afacad-v1-latin-500.5d482915d203b2e721c1.woff2",
     "index.html": "/car-rent-app-react/index.html",
     "main.ff906394.css.map": "/car-rent-app-react/static/css/main.ff906394.css.map",
-    "main.3e40aee7.js.map": "/car-rent-app-react/static/js/main.3e40aee7.js.map",
+    "main.3e5488b5.js.map": "/car-rent-app-react/static/js/main.3e5488b5.js.map",
     "856.3724fa11.chunk.js.map": "/car-rent-app-react/static/js/856.3724fa11.chunk.js.map",
-    "804.cbac3be5.chunk.js.map": "/car-rent-app-react/static/js/804.cbac3be5.chunk.js.map",
-    "850.18bece4e.chunk.js.map": "/car-rent-app-react/static/js/850.18bece4e.chunk.js.map"
+    "412.038d949a.chunk.js.map": "/car-rent-app-react/static/js/412.038d949a.chunk.js.map",
+    "850.279261a8.chunk.js.map": "/car-rent-app-react/static/js/850.279261a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ff906394.css",
-    "static/js/main.3e40aee7.js"
+    "static/js/main.3e5488b5.js"
   ]
 }
