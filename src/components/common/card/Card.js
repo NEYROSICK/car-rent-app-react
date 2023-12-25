@@ -14,12 +14,12 @@ import {
 } from "./card.styled";
 import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../../../redux/favoriteSlice";
+import { toggleFavorite } from "../../../redux/slices/favoriteSlice";
 import { getFavorites, getIsLoading } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
 import imgPlaceholder from "../../../images/wallpaper.jpg";
 import axios from "axios";
-import { setIsLoading } from "../../../redux/advertSlice";
+import { setIsLoading } from "../../../redux/slices/advertSlice";
 
 const Card = ({ item, onImageLoad }) => {
   const {
@@ -37,7 +37,6 @@ const Card = ({ item, onImageLoad }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imagePath, setImagePath] = useState(imgPlaceholder);
-  // const [isImageLoaded, setIsImageLoaded] = useState(false);
   const modalRoot = document.getElementById("modal");
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
@@ -50,7 +49,6 @@ const Card = ({ item, onImageLoad }) => {
       } catch (error) {
         setImagePath(imgPlaceholder);
       }
-      // setIsImageLoaded(true);
       onImageLoad();
     };
 

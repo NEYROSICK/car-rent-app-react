@@ -19,7 +19,7 @@ import IconCross from "../icons/IconCross";
 
 const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
   const {
-    img,
+    largeImg,
     make: brand,
     model,
     year,
@@ -64,7 +64,7 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
         <BtnClose onClick={handleCloseClick}>
           <IconCross />
         </BtnClose>
-        <Img src={img} alt={brand} width={461} height={248} />
+        <Img src={largeImg} alt={brand} width={461} height={248} />
         <ModalTitle>
           {brand}
           <Model> {model}</Model>, {year}

@@ -4,9 +4,10 @@ import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
 import { AdvertListSection, CardList } from "./advertList.styled";
 import { useEffect, useState } from "react";
-import { setPage } from "../../../redux/advertSlice";
+import { setPage } from "../../../redux/slices/advertSlice";
 import { BtnPagination } from "../../../views/catalog/catalogPage.styled";
 import { defaultLimit } from "../../../redux/constants";
+// import adverts from "../../../assets/adverts.json";
 
 const AdvertList = () => {
   let adverts = useSelector(getAdverts);

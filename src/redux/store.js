@@ -1,7 +1,7 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { advertReducer } from "./advertSlice";
-import { filterReducer } from "./filterSlice";
-import { favoriteReducer } from "./favoriteSlice";
+import { advertReducer } from "./slices/advertSlice";
+import { filterReducer } from "./slices/filterSlice";
+import { favoriteReducer } from "./slices/favoriteSlice";
 
 import storage from "redux-persist/lib/storage";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from "redux-persist";

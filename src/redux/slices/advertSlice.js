@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts } from "./operations";
+import { fetchAdverts } from "../operations";
 
 const advertSlice = createSlice({
   name: "adverts",

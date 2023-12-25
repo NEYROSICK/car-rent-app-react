@@ -5,8 +5,8 @@ import AdvertList from "../../components/catalog/advertList/AdvertList";
 import Filters from "../../components/common/filters/Filters";
 import { defaultLimit } from "../../redux/constants";
 import { getAdCount, getIsLoading, getPage } from "../../redux/selectors";
-import { setFilter } from "../../redux/filterSlice";
-import { setPage } from "../../redux/advertSlice";
+import { setFilter } from "../../redux/slices/filterSlice";
+import { setPage } from "../../redux/slices/advertSlice";
 import { BtnPagination, Main } from "./catalogPage.styled";
 import Loader from "../../components/common/loader/Loader";
 

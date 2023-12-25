@@ -11,16 +11,18 @@ import {
 import brands from "../../../assets/carBrands.json";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdCount } from "../../../redux/selectors";
-import { setFilter } from "../../../redux/filterSlice";
+import { setFilter } from "../../../redux/slices/filterSlice";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
 import { fetchAdverts } from "../../../redux/operations";
 import { defaultLimit } from "../../../redux/constants";
 import Container from "../container/Container";
+import { useSearchParams } from "react-router-dom";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
   const [clickedOption, setClickedOption] = useState("Select brand");
+  const [searchParams, setSearchParams] = useSearchParams();
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
   const brandButton = useRef(null);
@@ -41,6 +43,7 @@ const Filters = () => {
       dispatch(fetchAdverts({}));
     }
     if (clickedOption !== "Select brand") {
+      setSearchParams({ query: "hahah" });
       dispatch(setFilter(clickedOption));
     }
   };
