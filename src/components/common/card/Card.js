@@ -19,9 +19,8 @@ import { getFavorites, getIsLoading } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
 import imgPlaceholder from "../../../images/wallpaper.jpg";
 import axios from "axios";
-import { setIsLoading } from "../../../redux/slices/advertSlice";
 
-const Card = ({ item, onImageLoad }) => {
+const Card = ({ item }) => {
   const {
     img,
     make: brand,
@@ -49,24 +48,11 @@ const Card = ({ item, onImageLoad }) => {
       } catch (error) {
         setImagePath(imgPlaceholder);
       }
-      onImageLoad();
+      // onImageLoad();
     };
 
     checkUrlValidity();
   }, [img, dispatch]);
-
-  // const checkUrlValidity = async () => {
-  //   try {
-  //     const data = await axios.get(img);
-  //     console.log("hello", data.config.url);
-  //     imagePath = data.config.url;
-  //     console.log(imagePath);
-  //   } catch (error) {
-  //     imagePath = imgPlaceholder;
-  //   }
-  // };
-
-  // checkUrlValidity();
 
   const handleFavoriteToggle = (item) => {
     dispatch(toggleFavorite(item));
@@ -76,7 +62,6 @@ const Card = ({ item, onImageLoad }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  // if (isImageLoaded) {
   return (
     <CardContainer>
       <FavoriteBtn
@@ -124,7 +109,6 @@ const Card = ({ item, onImageLoad }) => {
     </CardContainer>
   );
 };
-// };
 
 Card.propTypes = { item: PropTypes.object.isRequired };
 

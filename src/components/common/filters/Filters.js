@@ -43,7 +43,7 @@ const Filters = () => {
       dispatch(fetchAdverts({}));
     }
     if (clickedOption !== "Select brand") {
-      setSearchParams({ query: "hahah" });
+      setSearchParams({ query: clickedOption });
       dispatch(setFilter(clickedOption));
     }
   };

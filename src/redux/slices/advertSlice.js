@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts } from "../operations";
+import { fetchAdverts, fetchAdvertsAll } from "../operations";
 
 const advertSlice = createSlice({
   name: "adverts",
   initialState: {
     items: [],
-    isLoading: false,
+    isLoading: true,
+    isFirstFetch: true,
     error: null,
-    count: 12,
-    page: 1,
+    generalCount: 0,
   },
   reducers: {
-    setPage(state, action) {
-      state.page = action.payload;
-    },
     setIsLoading(state, action) {
       state.isLoading = action.payload;
+    },
+    setAdverts(state, action) {
+      state.items = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -25,21 +25,32 @@ const advertSlice = createSlice({
       })
       .addCase(fetchAdverts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = null;
-        if (state.page === 1) {
-          state.items = action.payload;
-        } else {
-          state.items = [...state.items, ...action.payload];
+        if (state.isFirstFetch) {
+          state.isFirstFetch = false;
         }
+        state.error = null;
+        state.items = [...state.items, ...action.payload];
         state.count = action.payload.length;
       })
       .addCase(fetchAdverts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(fetchAdvertsAll.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAdvertsAll.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.generalCount = action.payload.length;
+      })
+      .addCase(fetchAdvertsAll.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const { fetchingInProgress, fetchingSuccess, fetchingError, setPage, setIsLoading } =
-  advertSlice.actions;
+export const { setAdverts, setIsLoading } = advertSlice.actions;
 export const advertReducer = advertSlice.reducer;
