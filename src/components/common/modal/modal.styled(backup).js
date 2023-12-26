@@ -16,10 +16,10 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  display: flex;
   position: relative;
-  padding: 56px 40px;
-  gap: 20px;
+  width: 541px;
+
+  padding: 40px;
 
   background-color: var(--clr-bcg);
   border-radius: 24px;
@@ -50,22 +50,11 @@ export const BtnClose = styled.button`
   }
 `;
 
-export const ImgContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 export const Img = styled.img`
   display: block;
-  width: 440px;
   object-fit: cover;
   border-radius: 14px;
-  flex-grow: 1;
-`;
-
-export const InfoContainer = styled.div`
-  width: 380px;
+  margin-bottom: 14px;
 `;
 
 export const ModalTitle = styled.h3`
@@ -83,7 +72,7 @@ export const AdditionalInfo = styled.ul`
   column-gap: 12px;
   row-gap: 4px;
   color: var(--clr-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 14px;
 
   & > li {
     position: relative;
@@ -103,7 +92,7 @@ export const AdditionalInfo = styled.ul`
 
   ${({ accessories }) =>
     accessories &&
-    `margin-bottom: 40px; 
+    `margin-bottom: 24px; 
     width: auto;
     `}
 `;
@@ -113,7 +102,7 @@ export const Description = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 `;
 
 export const ModalSecondaryTitle = styled.h4`
@@ -127,6 +116,8 @@ export const ConditionList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 24px;
+  width: 388px;
 
   letter-spacing: -0.24px;
 

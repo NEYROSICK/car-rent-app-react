@@ -34,6 +34,6 @@ export const ButtonStyled = styled.button`
   ${({ variant }) =>
     variant === "rental" &&
     `
-    max-width: 168px;
+    max-width: auto;
   `}
 `;

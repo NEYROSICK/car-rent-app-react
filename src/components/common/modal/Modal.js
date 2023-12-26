@@ -8,6 +8,8 @@ import {
   ConditionList,
   Description,
   Img,
+  ImgContainer,
+  InfoContainer,
   ModalContainer,
   ModalSecondaryTitle,
   ModalTitle,
@@ -17,7 +19,7 @@ import { nanoid } from "nanoid";
 import Button from "../button/Button";
 import IconCross from "../icons/IconCross";
 
-const Modal = ({ item, isModalOpen, setIsModalOpen, juice }) => {
+const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
   const {
     largeImg,
     make: brand,
@@ -35,8 +37,6 @@ const Modal = ({ item, isModalOpen, setIsModalOpen, juice }) => {
     mileage,
     rentalPrice,
   } = item;
-
-  console.log(juice);
 
   const handleCloseClick = (e) => {
     if (e.currentTarget === e.target) {
@@ -66,58 +66,78 @@ const Modal = ({ item, isModalOpen, setIsModalOpen, juice }) => {
         <BtnClose onClick={handleCloseClick}>
           <IconCross />
         </BtnClose>
-        <Img src={largeImg} alt={brand} width={461} height={248} />
-        <ModalTitle>
-          {brand}
-          <Model> {model}</Model>, {year}
-        </ModalTitle>
-        <AdditionalInfo>
-          <li>{address.split(", ")[1]}</li>
-          <li>{address.split(", ")[2]}</li>
-          <li>Id: {id}</li>
-          <li>Year: {year}</li>
-          <li>Type: {type}</li>
-          <li>Fuel Consumption: {fuelConsumption}</li>
-          <li>Engine Size: {engineSize}</li>
-        </AdditionalInfo>
-        <Description>{description}</Description>
+        <ImgContainer>
+          <Img src={largeImg} alt={brand} width={461} height={248} />
+          <Button variant="rental" href="tel:+380730000000">
+            Rental car
+          </Button>
+        </ImgContainer>
+        <InfoContainer>
+          <ModalTitle>
+            {brand}
+            <Model> {model}</Model>, {year}
+          </ModalTitle>
+          <AdditionalInfo>
+            <li>{address.split(", ")[1]}</li>
+            <li>{address.split(", ")[2]}</li>
+            <li>Id: {id}</li>
+            <li>Year: {year}</li>
+            <li>Type: {type}</li>
+            <li>Fuel Consumption: {fuelConsumption}</li>
+            <li>Engine Size: {engineSize}</li>
+          </AdditionalInfo>
+          <Description>{description}</Description>
+          <ModalSecondaryTitle>Accessories and functionalities:</ModalSecondaryTitle>
 
-        <ModalSecondaryTitle>Accessories and functionalities:</ModalSecondaryTitle>
+          <AdditionalInfo accessories>
+            {accessories.map((element, index) => {
+              const words = element.split(" ");
+              const symbols = element.split("");
+              let accessory;
+              symbols.length <= 28
+                ? (accessory = words.slice(0, 3).join(" "))
+                : (accessory = words.slice(0, 2).join(" "));
 
-        <AdditionalInfo accessories>
-          {accessories.map((element) => (
-            <li key={nanoid()}>{element}</li>
-          ))}
-          {functionalities.map((element) => (
-            <li key={nanoid()}>{element}</li>
-          ))}
-        </AdditionalInfo>
+              return <li key={nanoid()}>{accessory}</li>;
+            })}
+            {functionalities.map((element, index) => {
+              const words = element.split(" ");
+              const symbols = element.split("");
+              let functionality;
+              symbols.length <= 28
+                ? (functionality = words.slice(0, 3).join(" "))
+                : (functionality = words.slice(0, 2).join(" "));
+              return <li key={nanoid()}>{functionality}</li>;
+            })}
+          </AdditionalInfo>
 
-        <ModalSecondaryTitle>Rental Conditions: </ModalSecondaryTitle>
+          <ModalSecondaryTitle>Rental Conditions: </ModalSecondaryTitle>
 
-        <ConditionList>
-          {rentalConditions.split("\n").map((element, index) =>
-            index === 0 ? (
-              <li key={nanoid()}>
-                {element.split(" ")[0] + " "}
-                {element.split(" ")[1]}
-                <Brand> {element.split(": ")[1]}</Brand>
-              </li>
-            ) : (
-              <li key={nanoid()}>{element}</li>
-            )
-          )}
-          <li>
-            Mileage: <Brand>{mileage}</Brand>
-          </li>
-          <li>
-            Price: <Brand>{rentalPrice}</Brand>
-          </li>
-        </ConditionList>
+          <ConditionList>
+            {rentalConditions.split("\n").map((element, index) => {
+              if (index === 0) {
+                return (
+                  <li key={nanoid()}>
+                    {element.split(" ")[0] + " "}
+                    {element.split(" ")[1]}
+                    <Brand> {element.split(": ")[1]}</Brand>
+                  </li>
+                );
+              } else if (element.includes("Security")) {
+                return <li key={nanoid()}>{element.replace("and insurance", "")}</li>;
+              } else {
+                return <li key={nanoid()}>{element}</li>;
+              }
+            })}
 
-        <Button variant="rental" href="tel:+380730000000">
-          Rental car
-        </Button>
+            <li>
+              Mileage: <Brand>{mileage}</Brand>
+            </li>
+            <li>
+              Price: <Brand>{rentalPrice}</Brand>
+            </li>
+          </ConditionList>
+        </InfoContainer>
       </ModalContainer>
     </Backdrop>
   );

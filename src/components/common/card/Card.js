@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "../../common/modal/Modal";
 import { createPortal } from "react-dom";
@@ -15,11 +15,8 @@ import {
 import IconHeart from "../../common/icons/IconHeart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../../redux/slices/favoriteSlice";
-import { getFavorites, getIsLoading } from "../../../redux/selectors";
+import { getFavorites } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
-import imgPlaceholder from "../../../images/wallpaper.jpg";
-import axios from "axios";
-import { nanoid } from "nanoid";
 
 const Card = ({ item }) => {
   const {
@@ -36,23 +33,9 @@ const Card = ({ item }) => {
   } = item;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [imagePath, setImagePath] = useState(imgPlaceholder);
   const modalRoot = document.getElementById("modal");
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
-
-  useEffect(() => {
-    const checkUrlValidity = async () => {
-      try {
-        const data = await axios.get(img);
-        setImagePath(data.config.url);
-      } catch (error) {
-        setImagePath(imgPlaceholder);
-      }
-    };
-
-    checkUrlValidity();
-  }, [img, dispatch]);
 
   const handleFavoriteToggle = (item) => {
     dispatch(toggleFavorite(item));
@@ -75,7 +58,7 @@ const Card = ({ item }) => {
       </FavoriteBtn>
 
       <ImgContainer>
-        <CarImg src={imagePath} alt={brand} width={274} height={274} />
+        <CarImg src={img} alt={brand} width={274} height={274} />
       </ImgContainer>
       <TitleContainer>
         <CardTitle>
@@ -99,12 +82,7 @@ const Card = ({ item }) => {
 
       {isModalOpen &&
         createPortal(
-          <Modal
-            juice={nanoid()}
-            item={item}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />,
+          <Modal item={item} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />,
           modalRoot
         )}
     </CardContainer>
