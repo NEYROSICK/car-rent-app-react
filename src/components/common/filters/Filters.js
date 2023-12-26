@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import IconChevron from "../icons/IconChevron";
 import {
   BrandContainer,
@@ -9,52 +9,51 @@ import {
   SelectBtn,
 } from "./filters.styled";
 import brands from "../../../assets/carBrands.json";
-import { useDispatch, useSelector } from "react-redux";
-import { getAdCount } from "../../../redux/selectors";
-import { setFilter } from "../../../redux/slices/filterSlice";
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../../redux/slices/filterSlice";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
-import { fetchAdverts } from "../../../redux/operations";
-import { defaultLimit } from "../../../redux/constants";
 import Container from "../container/Container";
 import { useSearchParams } from "react-router-dom";
 
 const Filters = () => {
   const [isBrandOpen, setIsBrandOpen] = useState(false);
-  const [clickedOption, setClickedOption] = useState("Select brand");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [chosenOption, setChosenOption] = useState("Select brand");
+
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
   const brandButton = useRef(null);
-
   const dispatch = useDispatch();
-  const count = useSelector(getAdCount);
 
-  const handleBrandClick = (e) => {
-    if (e.target.innerText !== clickedOption) {
-      setClickedOption(e.target.innerText);
+  const paramsBrandName = useMemo(() => {
+    if (searchParams.get("brand")) {
+      const lowercaseBrands = brands.map((element) => element.toLowerCase());
+      const index = lowercaseBrands.findIndex(
+        (element) => element === searchParams.get("brand").toLowerCase()
+      );
+      return index === -1 ? false : brands[index];
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchParams.get("brand") && paramsBrandName) {
+      dispatch(setFilters(paramsBrandName));
+      setChosenOption(paramsBrandName);
+    } else {
+      setChosenOption("Select brand");
     }
 
-    setIsBrandOpen(!isBrandOpen);
-  };
-
-  const handleSearchClick = () => {
-    if (count === defaultLimit && clickedOption !== "Select brand") {
-      dispatch(fetchAdverts({}));
-    }
-    if (clickedOption !== "Select brand") {
-      setSearchParams({ query: clickedOption });
-      dispatch(setFilter(clickedOption));
-    }
-  };
+    return () => {
+      dispatch(setFilters(null));
+    };
+  }, [dispatch, searchParams, paramsBrandName]);
 
   useEffect(() => {
     if (isBrandOpen && scrollToRef.current) {
       dropdownRef.current.scrollTop = scrollToRef.current.offsetTop - 14;
     }
-  }, [isBrandOpen]);
 
-  useEffect(() => {
     const handleClickOutside = (e) => {
       if (
         dropdownRef.current &&
@@ -71,6 +70,24 @@ const Filters = () => {
     };
   }, [isBrandOpen]);
 
+  const handleBrandClick = (e) => {
+    if (e.target.innerText !== chosenOption) {
+      setChosenOption(e.target.innerText);
+    }
+
+    setIsBrandOpen(!isBrandOpen);
+  };
+
+  const handleSearchClick = () => {
+    if (chosenOption !== "Select brand") {
+      setSearchParams({ brand: chosenOption });
+    }
+  };
+
+  // function capitalizeFirstLetter(brand) {
+  //   return brand.charAt(0).toUpperCase() + brand.slice(1);
+  // }
+
   return (
     <FiltersContainer>
       <Container>
@@ -85,7 +102,7 @@ const Filters = () => {
               isBrandOpen={isBrandOpen}
               ref={brandButton}
             >
-              <span>{clickedOption}</span>
+              <span>{chosenOption}</span>
               <IconChevron />
             </SelectBtn>
 
@@ -96,10 +113,10 @@ const Filters = () => {
                     {brands.map((brand) => (
                       <BrandItem
                         onClick={handleBrandClick}
-                        clickedOption={clickedOption}
+                        chosenOption={chosenOption}
                         brand={brand}
                         key={nanoid()}
-                        ref={clickedOption === brand ? scrollToRef : null}
+                        ref={chosenOption === brand ? scrollToRef : null}
                       >
                         {brand}
                       </BrandItem>

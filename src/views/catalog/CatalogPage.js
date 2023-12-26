@@ -1,21 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AdvertList from "../../components/catalog/advertList/AdvertList";
 import Filters from "../../components/common/filters/Filters";
-import { getIsLoading } from "../../redux/selectors";
+import { getFilters } from "../../redux/selectors";
 import { Main, Section } from "./catalogPage.styled";
-import Loader from "../../components/common/loader/Loader";
-import { useEffect } from "react";
-import { fetchAdverts } from "../../redux/operations";
+import FilteredList from "../../components/catalog/filteredList/FilteredList";
 
 const CatalogPage = () => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
+  const filters = useSelector(getFilters);
+  const isFiltersSet = Object.values(filters).some((option) => option);
 
   return (
     <Main>
       <Section>
         <Filters />
-        <AdvertList />
+        {!isFiltersSet ? <AdvertList /> : <FilteredList />}
+        {/* <AdvertList /> */}
       </Section>
     </Main>
   );

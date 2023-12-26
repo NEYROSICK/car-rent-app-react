@@ -1,66 +1,66 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAdCount, getAdverts, getBrand, getPage } from "../../../redux/selectors";
+import { getAdverts, getFilters, getGeneralCount, getIsLoading } from "../../../redux/selectors";
 import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
 import { ListSection, CardList, BtnPagination } from "../advertList/advertList.styled";
 import { useEffect, useState } from "react";
-import { setPage } from "../../../redux/slices/advertSlice";
-import { defaultLimit } from "../../../redux/constants";
+import { setAdverts } from "../../../redux/slices/advertSlice";
+import { fetchAdverts } from "../../../redux/operations";
+import Loader from "../../common/loader/Loader";
 
-const AdvertList = () => {
+const FilteredList = () => {
   let adverts = useSelector(getAdverts);
-  const brand = useSelector(getBrand);
-  const count = useSelector(getAdCount);
-  const page = useSelector(getPage);
+  const isLoading = useSelector(getIsLoading);
+  const generalCount = useSelector(getGeneralCount);
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-
-  const filterAdverts = () => {
-    return adverts.filter(({ make }) => make === brand);
-  };
-
-  if (brand) {
-    adverts = filterAdverts();
-  }
-
-  const [loadedImagesCount, setLoadedImagesCount] = useState(0);
-  const [areAllImagesLoaded, setAreAllImagesLoaded] = useState(false);
-
-  const handleImageLoad = () => {
-    setLoadedImagesCount((prevCount) => prevCount + 1);
-  };
+  const brand = useSelector(getFilters).brand;
 
   useEffect(() => {
-    if (loadedImagesCount === adverts.length) {
-      console.log(loadedImagesCount, adverts.length);
-      setAreAllImagesLoaded(true);
-      console.log(areAllImagesLoaded);
-    }
-  }, [loadedImagesCount, adverts.length]);
+    dispatch(fetchAdverts({}));
 
-  return (
-    <>
-      <ListSection areAllLoaded={areAllImagesLoaded}>
-        <Container>
-          <h2 className="visually-hidden">Car advertisement list</h2>
-          <CardList>
-            {adverts.map((advert) => (
-              <Card item={advert} key={advert.id} onImageLoad={handleImageLoad} />
-            ))}
-          </CardList>
-        </Container>
-      </ListSection>
-      {count === defaultLimit && (
-        <BtnPagination
-          onClick={() => {
-            dispatch(setPage(page + 1));
-          }}
-          areAllLoaded={areAllImagesLoaded}
-        >
-          Load more
-        </BtnPagination>
-      )}
-    </>
-  );
+    return () => {
+      dispatch(setAdverts([]));
+    };
+  }, [dispatch]);
+
+  const handleClick = () => {
+    setPage(page + 1);
+  };
+
+  const filterAdverts = () => {
+    return adverts.filter(({ make }) => make.toLowerCase() === brand.toLowerCase());
+  };
+
+  adverts = filterAdverts();
+
+  if (!adverts.length) {
+    return <Loader variant="initialization" size={90} />;
+  } else {
+    return (
+      <>
+        <ListSection>
+          <Container>
+            <h2 className="visually-hidden">Car advertisement list</h2>
+            <CardList>
+              {adverts.map((advert) => (
+                <Card item={advert} key={advert.id} />
+              ))}
+            </CardList>
+          </Container>
+        </ListSection>
+        {adverts.length < generalCount && (
+          <>
+            {isLoading ? (
+              <Loader variant="pagination" size={90} />
+            ) : (
+              <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+            )}
+          </>
+        )}
+      </>
+    );
+  }
 };
 
-export default AdvertList;
+export default FilteredList;

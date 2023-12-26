@@ -19,6 +19,7 @@ import { getFavorites, getIsLoading } from "../../../redux/selectors";
 import Button from "../../common/button/Button";
 import imgPlaceholder from "../../../images/wallpaper.jpg";
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 const Card = ({ item }) => {
   const {
@@ -48,7 +49,6 @@ const Card = ({ item }) => {
       } catch (error) {
         setImagePath(imgPlaceholder);
       }
-      // onImageLoad();
     };
 
     checkUrlValidity();
@@ -100,7 +100,8 @@ const Card = ({ item }) => {
       {isModalOpen &&
         createPortal(
           <Modal
-            item={(item = { ...item, img: imagePath })}
+            juice={nanoid()}
+            item={item}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
           />,

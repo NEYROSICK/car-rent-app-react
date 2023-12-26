@@ -17,7 +17,7 @@ import { nanoid } from "nanoid";
 import Button from "../button/Button";
 import IconCross from "../icons/IconCross";
 
-const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
+const Modal = ({ item, isModalOpen, setIsModalOpen, juice }) => {
   const {
     largeImg,
     make: brand,
@@ -35,6 +35,8 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
     mileage,
     rentalPrice,
   } = item;
+
+  console.log(juice);
 
   const handleCloseClick = (e) => {
     if (e.currentTarget === e.target) {
@@ -84,10 +86,10 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
 
         <AdditionalInfo accessories>
           {accessories.map((element) => (
-            <li key={nanoid}>{element}</li>
+            <li key={nanoid()}>{element}</li>
           ))}
           {functionalities.map((element) => (
-            <li key={nanoid}>{element}</li>
+            <li key={nanoid()}>{element}</li>
           ))}
         </AdditionalInfo>
 
@@ -96,13 +98,13 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
         <ConditionList>
           {rentalConditions.split("\n").map((element, index) =>
             index === 0 ? (
-              <li key={nanoid}>
+              <li key={nanoid()}>
                 {element.split(" ")[0] + " "}
                 {element.split(" ")[1]}
                 <Brand> {element.split(": ")[1]}</Brand>
               </li>
             ) : (
-              <li key={nanoid}>{element}</li>
+              <li key={nanoid()}>{element}</li>
             )
           )}
           <li>

@@ -67,7 +67,7 @@ export const BrandList = styled.div`
 
   font-size: 16px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 19px;
   color: var(--clr-filter-inactive);
 
   border: 1px solid rgba(18, 20, 23, 0.05);
@@ -112,8 +112,8 @@ export const BrandList = styled.div`
 export const BrandItem = styled.li`
   width: 192px;
   padding: 4px 10px;
-  color: ${({ brand, clickedOption }) =>
-    brand !== clickedOption ? "inherit" : "var(--clr-primary)"};
+  color: ${({ brand, chosenOption }) =>
+    brand !== chosenOption ? "inherit" : "var(--clr-primary)"};
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;

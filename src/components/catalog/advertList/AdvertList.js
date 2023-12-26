@@ -1,32 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAdverts,
-  getGeneralCount,
-  getIsFirstFetch,
-  getIsLoading,
-} from "../../../redux/selectors";
+import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
 import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
 import { ListSection, CardList, BtnPagination } from "./advertList.styled";
 import { useEffect, useState } from "react";
 import { setAdverts } from "../../../redux/slices/advertSlice";
-import { fetchAdverts, fetchAdvertsAll } from "../../../redux/operations";
+import { fetchAdverts, getAdvertCount } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
+import { useSearchParams } from "react-router-dom";
 
 const AdvertList = () => {
   const dispatch = useDispatch();
   const adverts = useSelector(getAdverts);
   const isLoading = useSelector(getIsLoading);
-  const isFirstFetch = useSelector(getIsFirstFetch);
   const generalCount = useSelector(getGeneralCount);
+  const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
+  const limit = 12;
 
   useEffect(() => {
-    dispatch(fetchAdverts({ page }));
-  }, [dispatch, page]);
+    if (!searchParams.get("brand")) {
+      dispatch(fetchAdverts({ page, limit }));
+    }
+  }, [dispatch, page, searchParams]);
 
   useEffect(() => {
-    dispatch(fetchAdvertsAll());
+    dispatch(getAdvertCount());
 
     return () => {
       dispatch(setAdverts([]));
@@ -37,9 +36,7 @@ const AdvertList = () => {
     setPage(page + 1);
   };
 
-  console.log(generalCount, adverts.length);
-
-  if (isFirstFetch) {
+  if (!adverts.length) {
     return <Loader variant="initialization" size={90} />;
   } else {
     return (
