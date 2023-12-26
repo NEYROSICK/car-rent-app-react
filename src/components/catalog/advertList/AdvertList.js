@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
-import Container from "../../common/container/Container";
 import Card from "../../common/card/Card";
 import { ListSection, CardList, BtnPagination } from "./advertList.styled";
 import { useEffect, useState } from "react";
@@ -42,14 +41,12 @@ const AdvertList = () => {
     return (
       <>
         <ListSection>
-          <Container>
-            <h2 className="visually-hidden">Car advertisement list</h2>
-            <CardList>
-              {adverts.map((advert) => (
-                <Card item={advert} key={advert.id} />
-              ))}
-            </CardList>
-          </Container>
+          <h2 className="visually-hidden">Car advertisement list</h2>
+          <CardList>
+            {adverts.map((advert) => (
+              <Card item={advert} key={advert.id} />
+            ))}
+          </CardList>
         </ListSection>
         {adverts.length < generalCount && (
           <>

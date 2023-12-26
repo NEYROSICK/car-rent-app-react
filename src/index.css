@@ -14,6 +14,7 @@
   --clr-secondary: rgba(18, 20, 23, 0.5);
   --clr-secondary-lt: #8a8a89;
   --clr-filter-inactive: rgba(18, 20, 23, 0.2);
+  --clr-favorites-message: #c5d3de;
 
   /*brand color*/
   --clr-brand: #3470ff;
@@ -28,14 +29,14 @@
   --svg-size-logo: 48px;
 }
 
-/* @font-face {
+@font-face {
   font-display: swap;
   font-family: "Manrope";
   font-style: normal;
   font-weight: 400;
   src: url("./fonts/manrope-v15-cyrillic_latin-400.woff2") format("woff2");
 }
-*/
+
 @font-face {
   font-display: swap;
   font-family: "Manrope";
@@ -79,6 +80,7 @@ body {
   margin: 0;
   overflow-x: hidden;
 
+  font-family: Manrope, sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

@@ -17,7 +17,6 @@ export const BtnPagination = styled.button`
   width: 210px;
   height: 48px;
 
-  /* display: ${({ areAllLoaded }) => (areAllLoaded ? "block" : "none")}; */
   display: block;
   margin: 0 auto;
   margin-top: 50px;

@@ -18,7 +18,7 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div`
   display: flex;
   position: relative;
-  padding: 56px 40px;
+  padding: 40px 40px;
   gap: 20px;
 
   background-color: var(--clr-bcg);
@@ -27,8 +27,8 @@ export const ModalContainer = styled.div`
 
 export const BtnClose = styled.button`
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 20px;
+  right: 20px;
   width: 24px;
   height: 24px;
 

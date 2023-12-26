@@ -4,6 +4,7 @@ import Filters from "../../components/common/filters/Filters";
 import { getFilters } from "../../redux/selectors";
 import { Main, Section } from "./catalogPage.styled";
 import FilteredList from "../../components/catalog/filteredList/FilteredList";
+import Container from "../../components/common/container/Container";
 
 const CatalogPage = () => {
   const filters = useSelector(getFilters);
@@ -12,9 +13,10 @@ const CatalogPage = () => {
   return (
     <Main>
       <Section>
-        <Filters />
-        {!isFiltersSet ? <AdvertList /> : <FilteredList />}
-        {/* <AdvertList /> */}
+        <Container>
+          <Filters />
+          {!isFiltersSet ? <AdvertList /> : <FilteredList />}
+        </Container>
       </Section>
     </Main>
   );

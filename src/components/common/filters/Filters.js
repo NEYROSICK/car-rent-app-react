@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { setFilters } from "../../../redux/slices/filterSlice";
 import { nanoid } from "nanoid";
 import Button from "../button/Button";
-import Container from "../container/Container";
 import { useSearchParams } from "react-router-dom";
 
 const Filters = () => {
@@ -83,54 +82,47 @@ const Filters = () => {
       setSearchParams({ brand: chosenOption });
     }
   };
-
-  // function capitalizeFirstLetter(brand) {
-  //   return brand.charAt(0).toUpperCase() + brand.slice(1);
-  // }
-
   return (
     <FiltersContainer>
-      <Container>
-        <FiltersList>
-          <BrandContainer>
-            <p>Car brand</p>
+      <FiltersList>
+        <BrandContainer>
+          <p>Car brand</p>
 
-            <SelectBtn
-              onClick={() => {
-                setIsBrandOpen(!isBrandOpen);
-              }}
-              isBrandOpen={isBrandOpen}
-              ref={brandButton}
-            >
-              <span>{chosenOption}</span>
-              <IconChevron />
-            </SelectBtn>
+          <SelectBtn
+            onClick={() => {
+              setIsBrandOpen(!isBrandOpen);
+            }}
+            isBrandOpen={isBrandOpen}
+            ref={brandButton}
+          >
+            <span>{chosenOption}</span>
+            <IconChevron />
+          </SelectBtn>
 
-            {isBrandOpen && (
-              <BrandList>
-                <div ref={dropdownRef}>
-                  <ul>
-                    {brands.map((brand) => (
-                      <BrandItem
-                        onClick={handleBrandClick}
-                        chosenOption={chosenOption}
-                        brand={brand}
-                        key={nanoid()}
-                        ref={chosenOption === brand ? scrollToRef : null}
-                      >
-                        {brand}
-                      </BrandItem>
-                    ))}
-                  </ul>
-                </div>
-              </BrandList>
-            )}
-          </BrandContainer>
-          <Button variant="search" onClick={handleSearchClick}>
-            Search
-          </Button>
-        </FiltersList>
-      </Container>
+          {isBrandOpen && (
+            <BrandList>
+              <div ref={dropdownRef}>
+                <ul>
+                  {brands.map((brand) => (
+                    <BrandItem
+                      onClick={handleBrandClick}
+                      chosenOption={chosenOption}
+                      brand={brand}
+                      key={nanoid()}
+                      ref={chosenOption === brand ? scrollToRef : null}
+                    >
+                      {brand}
+                    </BrandItem>
+                  ))}
+                </ul>
+              </div>
+            </BrandList>
+          )}
+        </BrandContainer>
+        <Button variant="search" onClick={handleSearchClick}>
+          Search
+        </Button>
+      </FiltersList>
     </FiltersContainer>
   );
 };

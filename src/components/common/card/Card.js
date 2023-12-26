@@ -32,13 +32,13 @@ const Card = ({ item }) => {
     accessories,
   } = item;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRoot = document.getElementById("modal");
-  const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const favorites = useSelector(getFavorites);
+  const dispatch = useDispatch();
 
-  const handleFavoriteToggle = (item) => {
-    dispatch(toggleFavorite(item));
+  const handleFavoriteToggle = (id) => {
+    dispatch(toggleFavorite(id));
   };
 
   const handleModalOpen = () => {
@@ -48,10 +48,10 @@ const Card = ({ item }) => {
   return (
     <CardContainer>
       <FavoriteBtn
+        id={id}
         favorites={favorites}
-        item={item}
         onClick={() => {
-          handleFavoriteToggle(item);
+          handleFavoriteToggle(id);
         }}
       >
         <IconHeart />

@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
 
-const deepEqual = (obj1, obj2) => {
-  return JSON.stringify(obj1) === JSON.stringify(obj2);
-};
-
 export const CardContainer = styled.li`
   display: flex;
   flex-direction: column;
@@ -38,13 +34,11 @@ export const FavoriteBtn = styled.button`
     height: 100%;
     stroke: var(--clr-brand);
 
-    fill: ${({ favorites, item }) => {
+    fill: ${({ favorites, id }) => {
       if (favorites === null) {
         return "transparent";
       }
-      return favorites.some((favorite) => deepEqual(favorite, item))
-        ? "var(--clr-brand)"
-        : "transparent";
+      return favorites.includes(id) ? "var(--clr-brand)" : "transparent";
     }};
 
     transition: scale 0.3s, fill 0.3s;
