@@ -79,7 +79,7 @@ const Filters = () => {
 
   const handleSearchClick = () => {
     if (chosenOption !== "Select brand") {
-      setSearchParams({ brand: chosenOption });
+      setSearchParams({ brand: chosenOption.toLowerCase() });
     }
   };
   return (
