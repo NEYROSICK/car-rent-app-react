@@ -28,7 +28,7 @@ export const SelectBtn = styled.button`
 
   border: none;
   border-radius: 14px;
-  background: #f7f7fb;
+  background-color: var(--clr-bcg-filter);
   cursor: pointer;
 
   & > span {
@@ -44,7 +44,7 @@ export const SelectBtn = styled.button`
   }
 `;
 
-export const OptionList = styled.div`
+export const OptionList = styled.ul`
   position: absolute;
   top: 80px;
   left: 0;

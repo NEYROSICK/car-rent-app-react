@@ -6,7 +6,7 @@ export const Main = styled.main`
   background-image: url(${wallpaper});
   background-size: cover;
   background-position: center;
-  height: calc(100% - 92px);
+  height: calc(100% - 93.6px);
   font-size: 18px;
 `;
 

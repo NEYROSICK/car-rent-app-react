@@ -6,6 +6,7 @@ import prices from "../../../assets/carPrices.json";
 import Button from "../button/Button";
 import FilterDropdown from "../filterDropdown/FilterDropdown";
 import { deepEqual } from "../../../helpers/deepEqual";
+import FilterInputs from "../filterInputs/FilterInputs";
 
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,12 +27,18 @@ const Filters = () => {
 
   const handleSearchClick = () => {
     if (areFiltersSet && whetherFiltersChanged) {
+      // setSearchParams({
+      //   ...localFilters,mileage{}
+      //   from: localFilters.mileage.from,
+      //   to: localFilters.mileage.from,
+      // });
       setSearchParams(localFilters);
       console.clear();
       console.table({ areFiltersSet, whetherFiltersChanged });
     }
   };
 
+  console.table(localFilters);
   return (
     <FiltersContainer>
       <FiltersList>
@@ -54,6 +61,8 @@ const Filters = () => {
           dropdownDefault={"To $"}
           areParamsSet={areParamsSet}
         />
+
+        <FilterInputs localFilters={localFilters} setLocalFilters={setLocalFilters} />
 
         <Button variant="search" onClick={handleSearchClick}>
           Search

@@ -20,6 +20,9 @@
   --clr-brand: #3470ff;
   --clr-hover: #0b44cd;
 
+  /*other colors*/
+  --clr-input-decor: rgba(138, 138, 137, 0.2);
+
   /*global variables*/
   --scrollbar-width: 10px;
   --scrollbar-filter-width: 8px;

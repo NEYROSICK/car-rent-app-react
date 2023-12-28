@@ -14,7 +14,7 @@ const FilteredList = ({ params }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const [filteredAdverts, setFilteredAdverts] = useState(null);
-  const { brand, price, mileage } = params;
+  const { brand, price, from, to } = params;
 
   useEffect(() => {
     dispatch(fetchAdverts({}));
@@ -27,25 +27,32 @@ const FilteredList = ({ params }) => {
   useEffect(() => {
     const filterAdverts = () => {
       let filteredList = adverts;
+
       if (brand) {
         filteredList = filteredList.filter(({ make }) => {
           return make.toLowerCase() === brand.toLowerCase();
         });
       }
+
       if (price) {
         filteredList = filteredList.filter(
           ({ rentalPrice }) => rentalPrice.split("$").join("") <= Number(price)
         );
       }
-      if (mileage) {
-        filteredList = filteredList.filter("...smth");
+
+      if (from) {
+        filteredList = filteredList.filter(({ mileage }) => mileage >= Number(from));
+      }
+
+      if (to) {
+        filteredList = filteredList.filter(({ mileage }) => mileage <= Number(to));
       }
 
       return filteredList;
     };
 
     setFilteredAdverts(filterAdverts());
-  }, [adverts, brand, mileage, price]);
+  }, [adverts, brand, price, from, to]);
 
   const handleClick = () => {
     setPage(page + 1);

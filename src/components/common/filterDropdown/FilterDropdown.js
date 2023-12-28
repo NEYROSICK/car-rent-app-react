@@ -51,7 +51,7 @@ const FilterDropdown = ({
 
     if (!areParamsSet) {
       setChosenOption(dropdownDefault);
-      setLocalFilters({});
+      setLocalFilters({ from: "", to: "" });
     }
   }, [
     searchParamValue,
