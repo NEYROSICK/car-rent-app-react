@@ -1,6 +1,5 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { advertReducer } from "./slices/advertSlice";
-import { filterReducer } from "./slices/filterSlice";
 import { favoriteReducer } from "./slices/favoriteSlice";
 
 import storage from "redux-persist/lib/storage";
@@ -16,7 +15,6 @@ const favoritePersistConfig = {
 
 const rootReducer = combineReducers({
   adverts: advertReducer,
-  filters: filterReducer,
   favorites: persistReducer(favoritePersistConfig, favoriteReducer),
 });
 

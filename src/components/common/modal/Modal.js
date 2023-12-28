@@ -86,30 +86,8 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
             <li>Fuel Consumption: {fuelConsumption}</li>
             <li>Engine Size: {engineSize}</li>
           </AdditionalInfo>
+
           <Description>{description}</Description>
-          <ModalSecondaryTitle>Accessories and functionalities:</ModalSecondaryTitle>
-
-          <AdditionalInfo accessories>
-            {accessories.map((element, index) => {
-              const words = element.split(" ");
-              const symbols = element.split("");
-              let accessory;
-              symbols.length <= 28
-                ? (accessory = words.slice(0, 3).join(" "))
-                : (accessory = words.slice(0, 2).join(" "));
-
-              return <li key={nanoid()}>{accessory}</li>;
-            })}
-            {functionalities.map((element, index) => {
-              const words = element.split(" ");
-              const symbols = element.split("");
-              let functionality;
-              symbols.length <= 28
-                ? (functionality = words.slice(0, 3).join(" "))
-                : (functionality = words.slice(0, 2).join(" "));
-              return <li key={nanoid()}>{functionality}</li>;
-            })}
-          </AdditionalInfo>
 
           <ModalSecondaryTitle>Rental Conditions: </ModalSecondaryTitle>
 
@@ -137,6 +115,30 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
               Price: <Brand>{rentalPrice}</Brand>
             </li>
           </ConditionList>
+
+          <ModalSecondaryTitle>Accessories and functionalities:</ModalSecondaryTitle>
+
+          <AdditionalInfo accessories>
+            {accessories.map((element, index) => {
+              const words = element.split(" ");
+              const symbols = element.split("");
+              let accessory;
+              symbols.length <= 28
+                ? (accessory = words.slice(0, 3).join(" "))
+                : (accessory = words.slice(0, 2).join(" "));
+
+              return <li key={nanoid()}>{accessory}</li>;
+            })}
+            {functionalities.map((element, index) => {
+              const words = element.split(" ");
+              const symbols = element.split("");
+              let functionality;
+              symbols.length <= 28
+                ? (functionality = words.slice(0, 3).join(" "))
+                : (functionality = words.slice(0, 2).join(" "));
+              return <li key={nanoid()}>{functionality}</li>;
+            })}
+          </AdditionalInfo>
         </InfoContainer>
       </ModalContainer>
     </Backdrop>

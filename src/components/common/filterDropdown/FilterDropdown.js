@@ -3,53 +3,64 @@ import PropTypes from "prop-types";
 import { OptionItem, OptionList, ParamContainer, SelectBtn } from "./filterDropwown.styled";
 import IconChevron from "../icons/IconChevron";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setFilters } from "../../../redux/slices/filterSlice";
 import { nanoid } from "nanoid";
 
 const FilterDropdown = ({
+  areParamsSet,
   dropdownDefault,
   title,
   parameter,
   options,
-  localFilters,
   setLocalFilters,
 }) => {
   const [searchParams] = useSearchParams();
+  const searchParamValue = searchParams.get(parameter);
 
   const optionOriginalName = useMemo(() => {
-    if (searchParams.get(parameter)) {
+    if (searchParamValue && parameter !== "price") {
       const lowercaseOptions = options.map((element) => element.toLowerCase());
       const index = lowercaseOptions.findIndex(
-        (element) => element === searchParams.get(parameter).toLowerCase()
+        (element) => element === searchParamValue.toLowerCase()
       );
       return index === -1 ? false : options[index];
+    } else if (searchParamValue && parameter === "price") {
+      return searchParamValue;
     }
-  }, [searchParams, options, parameter]);
+  }, [searchParamValue, options, parameter]);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [chosenOption, setChosenOption] = useState(
-    searchParams.get(parameter) && optionOriginalName ? optionOriginalName : dropdownDefault
+    searchParamValue && optionOriginalName ? optionOriginalName : dropdownDefault
   );
 
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
   const optionButton = useRef(null);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (searchParams.get(parameter) && optionOriginalName) {
-      dispatch(setFilters(optionOriginalName));
+    if (searchParamValue && optionOriginalName) {
       setChosenOption(optionOriginalName);
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        [parameter]: parameter !== "price" ? optionOriginalName.toLowerCase() : optionOriginalName,
+      }));
     } else {
-      dispatch(setFilters(searchParams.get(parameter)));
       setChosenOption(dropdownDefault);
+      console.table({ searchParamValue, optionOriginalName });
     }
 
-    return () => {
-      dispatch(setFilters(null));
-    };
-  }, [dispatch, searchParams, optionOriginalName, parameter, dropdownDefault]);
+    if (!areParamsSet) {
+      setChosenOption(dropdownDefault);
+      setLocalFilters({});
+    }
+  }, [
+    searchParamValue,
+    optionOriginalName,
+    parameter,
+    dropdownDefault,
+    setLocalFilters,
+    areParamsSet,
+  ]);
 
   useEffect(() => {
     if (isDropdownOpen && scrollToRef.current) {
@@ -75,7 +86,10 @@ const FilterDropdown = ({
   const handleBrandClick = (e) => {
     if (e.target.innerText !== chosenOption) {
       setChosenOption(e.target.innerText);
-      setLocalFilters({ ...localFilters, [parameter]: e.target.innerText });
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        [parameter]: parameter !== "price" ? e.target.innerText.toLowerCase() : e.target.innerText,
+      }));
     }
 
     setIsDropdownOpen(!isDropdownOpen);

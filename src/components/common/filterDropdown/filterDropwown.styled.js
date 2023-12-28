@@ -39,7 +39,7 @@ export const SelectBtn = styled.button`
   & > svg {
     width: var(--svg-size-chevron);
     height: var(--svg-size-chevron);
-    transform: rotate(${({ isBrandOpen }) => (isBrandOpen ? "180deg" : "0deg")});
+    transform: rotate(${({ isDropdownOpen }) => (isDropdownOpen ? "180deg" : "0deg")});
     transition: transform 0.3s cubic-bezier(0.65, 1.79, 0.78, 1.02);
   }
 `;

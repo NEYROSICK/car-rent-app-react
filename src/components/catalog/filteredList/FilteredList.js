@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAdverts, getFilters, getGeneralCount, getIsLoading } from "../../../redux/selectors";
+import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
 import { CardList, BtnPagination } from "../advertList/advertList.styled";
 import { useEffect, useState } from "react";
@@ -7,14 +7,14 @@ import { setAdverts } from "../../../redux/slices/advertSlice";
 import { fetchAdverts } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
 
-const FilteredList = () => {
+const FilteredList = ({ params }) => {
   const adverts = useSelector(getAdverts);
   const isLoading = useSelector(getIsLoading);
   const generalCount = useSelector(getGeneralCount);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const brand = useSelector(getFilters).brand;
   const [filteredAdverts, setFilteredAdverts] = useState(null);
+  const { brand, price, mileage } = params;
 
   useEffect(() => {
     dispatch(fetchAdverts({}));
@@ -26,11 +26,26 @@ const FilteredList = () => {
 
   useEffect(() => {
     const filterAdverts = () => {
-      return adverts.filter(({ make }) => make.toLowerCase() === brand.toLowerCase());
+      let filteredList = adverts;
+      if (brand) {
+        filteredList = filteredList.filter(({ make }) => {
+          return make.toLowerCase() === brand.toLowerCase();
+        });
+      }
+      if (price) {
+        filteredList = filteredList.filter(
+          ({ rentalPrice }) => rentalPrice.split("$").join("") <= Number(price)
+        );
+      }
+      if (mileage) {
+        filteredList = filteredList.filter("...smth");
+      }
+
+      return filteredList;
     };
 
     setFilteredAdverts(filterAdverts());
-  }, [adverts, brand]);
+  }, [adverts, brand, mileage, price]);
 
   const handleClick = () => {
     setPage(page + 1);
@@ -39,11 +54,11 @@ const FilteredList = () => {
   if (filteredAdverts) {
     return (
       <>
-        {Boolean(!filteredAdverts.length && !isLoading) && (
+        {!filteredAdverts.length && !isLoading && (
           <p>Sorry, there are no matches for your request :(</p>
         )}
 
-        {Boolean(filteredAdverts.length) && (
+        {!!filteredAdverts.length && (
           <>
             <CardList>
               {filteredAdverts.map((advert) => (

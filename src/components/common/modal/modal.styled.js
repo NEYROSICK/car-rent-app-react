@@ -103,7 +103,7 @@ export const AdditionalInfo = styled.ul`
 
   ${({ accessories }) =>
     accessories &&
-    `margin-bottom: 40px; 
+    ` margin-bottom: 0px;
     width: auto;
     `}
 `;
@@ -127,6 +127,7 @@ export const ConditionList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 40px;
 
   letter-spacing: -0.24px;
 
