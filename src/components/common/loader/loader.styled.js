@@ -5,10 +5,22 @@ export const LoaderContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${({ variant }) =>
-    variant === "initialization" &&
+  ${({ variant, isFiltersShown }) =>
+    (variant === "initialization" || Boolean(isFiltersShown)) &&
     `
-    min-height: calc(100vh - 520px);
+    min-height: calc(100vh - 440px);
+  `}
+
+  ${({ variant, isFiltersShown }) =>
+    variant === "favorites" &&
+    !isFiltersShown &&
+    ` 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
   `}
 
   ${({ variant }) =>

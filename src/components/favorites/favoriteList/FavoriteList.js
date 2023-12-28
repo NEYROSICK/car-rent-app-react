@@ -40,8 +40,6 @@ const FavoriteList = () => {
     setSkip(page * 12);
   }, [page]);
 
-  console.log(limitedAdverts);
-
   return (
     <>
       {Boolean(!limitedAdvertsLength && !isLoading) && (
@@ -65,7 +63,7 @@ const FavoriteList = () => {
         </>
       )}
 
-      {isLoading && <Loader variant="initialization" size={90} />}
+      {isLoading && <Loader variant="favorites" size={90} isFiltersShown={favorites.length} />}
     </>
   );
 };

@@ -15,7 +15,7 @@ export const Message = styled.p`
   align-items: center;
   gap: 20px;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24px;
   text-align: center;

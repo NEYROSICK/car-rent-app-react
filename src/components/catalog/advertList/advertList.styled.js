@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
 
-export const ListSection = styled.div`
-  /* visibility: ${({ areAllLoaded }) => (areAllLoaded ? "visible" : "hidden")};
-  opacity: ${({ areAllLoaded }) => (areAllLoaded ? "1" : "0")}; */
-  transition: visibility 0.3s, opacity 0.3s;
-`;
-
 export const CardList = styled.ul`
   display: flex;
   flex-wrap: wrap;

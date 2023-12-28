@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
-import { ListSection, CardList, BtnPagination } from "./advertList.styled";
+import { CardList, BtnPagination } from "./advertList.styled";
 import { useEffect, useState } from "react";
 import { setAdverts } from "../../../redux/slices/advertSlice";
 import { fetchAdverts, getAdvertCount } from "../../../redux/operations";
@@ -40,14 +40,11 @@ const AdvertList = () => {
   } else {
     return (
       <>
-        <ListSection>
-          <h2 className="visually-hidden">Car advertisement list</h2>
-          <CardList>
-            {adverts.map((advert) => (
-              <Card item={advert} key={advert.id} />
-            ))}
-          </CardList>
-        </ListSection>
+        <CardList>
+          {adverts.map((advert) => (
+            <Card item={advert} key={advert.id} />
+          ))}
+        </CardList>
         {adverts.length < generalCount && (
           <>
             {isLoading ? (

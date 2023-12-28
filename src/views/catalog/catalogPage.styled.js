@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Main = styled.main`
-  min-height: calc(100% - 92px);
+  position: relative;
+  min-height: calc(100vh - 93.6px);
 `;
 
 export const Section = styled.section`

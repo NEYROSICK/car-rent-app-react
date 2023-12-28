@@ -14,6 +14,7 @@ const CatalogPage = () => {
     <Main>
       <Section>
         <Container>
+          <h2 className="visually-hidden">Car advertisement catalog</h2>
           <Filters />
           {!isFiltersSet ? <AdvertList /> : <FilteredList />}
         </Container>
