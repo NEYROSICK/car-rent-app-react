@@ -1,51 +1,58 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { BrandContainer, BrandItem, BrandList, SelectBtn } from "./filterDropwown.styled";
+import { OptionItem, OptionList, ParamContainer, SelectBtn } from "./filterDropwown.styled";
 import IconChevron from "../icons/IconChevron";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../../../redux/slices/filterSlice";
 import { nanoid } from "nanoid";
 
-const FilterDropdown = ({ param, options, localFilters, setLocalFilters }) => {
+const FilterDropdown = ({
+  dropdownDefault,
+  title,
+  parameter,
+  options,
+  localFilters,
+  setLocalFilters,
+}) => {
   const [searchParams] = useSearchParams();
 
-  const paramsBrandName = useMemo(() => {
-    if (searchParams.get(param)) {
+  const optionOriginalName = useMemo(() => {
+    if (searchParams.get(parameter)) {
       const lowercaseOptions = options.map((element) => element.toLowerCase());
       const index = lowercaseOptions.findIndex(
-        (element) => element === searchParams.get(param).toLowerCase()
+        (element) => element === searchParams.get(parameter).toLowerCase()
       );
       return index === -1 ? false : options[index];
     }
-  }, [searchParams, options, param]);
+  }, [searchParams, options, parameter]);
 
-  const [isBrandOpen, setIsBrandOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [chosenOption, setChosenOption] = useState(
-    searchParams.get(param) && paramsBrandName ? paramsBrandName : "Select brand"
+    searchParams.get(parameter) && optionOriginalName ? optionOriginalName : dropdownDefault
   );
 
   const dropdownRef = useRef(null);
   const scrollToRef = useRef(null);
-  const brandButton = useRef(null);
+  const optionButton = useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (searchParams.get(param) && paramsBrandName) {
-      dispatch(setFilters(paramsBrandName));
-      setChosenOption(paramsBrandName);
+    if (searchParams.get(parameter) && optionOriginalName) {
+      dispatch(setFilters(optionOriginalName));
+      setChosenOption(optionOriginalName);
     } else {
-      dispatch(setFilters(searchParams.get(param)));
-      setChosenOption("Select brand");
+      dispatch(setFilters(searchParams.get(parameter)));
+      setChosenOption(dropdownDefault);
     }
 
     return () => {
       dispatch(setFilters(null));
     };
-  }, [dispatch, searchParams, paramsBrandName, param]);
+  }, [dispatch, searchParams, optionOriginalName, parameter, dropdownDefault]);
 
   useEffect(() => {
-    if (isBrandOpen && scrollToRef.current) {
+    if (isDropdownOpen && scrollToRef.current) {
       dropdownRef.current.scrollTop = scrollToRef.current.offsetTop - 14;
     }
 
@@ -53,9 +60,9 @@ const FilterDropdown = ({ param, options, localFilters, setLocalFilters }) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target) &&
-        !brandButton.current.contains(e.target)
+        !optionButton.current.contains(e.target)
       ) {
-        setIsBrandOpen(!isBrandOpen);
+        setIsDropdownOpen(!isDropdownOpen);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -63,52 +70,53 @@ const FilterDropdown = ({ param, options, localFilters, setLocalFilters }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isBrandOpen]);
+  }, [isDropdownOpen]);
 
   const handleBrandClick = (e) => {
     if (e.target.innerText !== chosenOption) {
       setChosenOption(e.target.innerText);
-      setLocalFilters({ ...localFilters, brand: e.target.innerText });
+      setLocalFilters({ ...localFilters, [parameter]: e.target.innerText });
     }
 
-    setIsBrandOpen(!isBrandOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
-    <BrandContainer>
-      <p>Car brand</p>
+    <ParamContainer>
+      <p>{title}</p>
 
       <SelectBtn
         onClick={() => {
-          setIsBrandOpen(!isBrandOpen);
+          setIsDropdownOpen(!isDropdownOpen);
         }}
-        isBrandOpen={isBrandOpen}
-        ref={brandButton}
+        isDropdownOpen={isDropdownOpen}
+        ref={optionButton}
+        parameter={parameter}
       >
         <span>{chosenOption}</span>
         <IconChevron />
       </SelectBtn>
 
-      {isBrandOpen && (
-        <BrandList>
+      {isDropdownOpen && (
+        <OptionList parameter={parameter}>
           <div ref={dropdownRef}>
             <ul>
               {options.map((brand) => (
-                <BrandItem
+                <OptionItem
                   onClick={handleBrandClick}
                   chosenOption={chosenOption}
-                  brand={brand}
+                  parameter={parameter}
                   key={nanoid()}
                   ref={chosenOption === brand ? scrollToRef : null}
                 >
                   {brand}
-                </BrandItem>
+                </OptionItem>
               ))}
             </ul>
           </div>
-        </BrandList>
+        </OptionList>
       )}
-    </BrandContainer>
+    </ParamContainer>
   );
 };
 

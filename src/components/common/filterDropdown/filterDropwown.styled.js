@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const BrandContainer = styled.div`
+export const ParamContainer = styled.div`
   position: relative;
 
   & > p {
@@ -12,7 +12,8 @@ export const BrandContainer = styled.div`
 `;
 
 export const SelectBtn = styled.button`
-  width: 224px;
+  ${({ parameter }) => parameter === "brand" && `width: 224px;`}
+  ${({ parameter }) => parameter === "price" && `width: 125px;`}
 
   display: flex;
   justify-content: center;
@@ -43,19 +44,28 @@ export const SelectBtn = styled.button`
   }
 `;
 
-export const BrandList = styled.div`
+export const OptionList = styled.div`
   position: absolute;
   top: 78px;
   left: 0;
-  height: 272px;
-  width: 224px;
+
+  ${({ parameter }) =>
+    parameter === "brand" &&
+    `width: 224px;
+    height: 272px;`}
+
+  ${({ parameter }) =>
+    parameter === "price" &&
+    `width: 125px;    
+    height: 190px;`}
+
   z-index: 2;
 
   padding: 14px 8px;
 
   font-size: 16px;
   font-weight: 500;
-  line-height: 19px;
+  line-height: 18.6px;
   color: var(--clr-filter-inactive);
 
   border: 1px solid rgba(18, 20, 23, 0.05);
@@ -97,11 +107,13 @@ export const BrandList = styled.div`
   }
 `;
 
-export const BrandItem = styled.li`
-  width: 192px;
+export const OptionItem = styled.li`
+  ${({ parameter }) => parameter === "brand" && `width: 192px;`}
+  ${({ parameter }) => parameter === "price" && `width: 92px;`}
+
   padding: 4px 10px;
-  color: ${({ brand, chosenOption }) =>
-    brand !== chosenOption ? "inherit" : "var(--clr-primary)"};
+  color: ${({ parameter, chosenOption }) =>
+    parameter !== chosenOption ? "inherit" : "var(--clr-primary)"};
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
