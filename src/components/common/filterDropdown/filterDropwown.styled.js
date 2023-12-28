@@ -46,7 +46,7 @@ export const SelectBtn = styled.button`
 
 export const OptionList = styled.div`
   position: absolute;
-  top: 78px;
+  top: 80px;
   left: 0;
 
   ${({ parameter }) =>
