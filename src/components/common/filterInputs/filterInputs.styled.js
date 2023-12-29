@@ -36,14 +36,14 @@ export const FilterInputBlock = styled.div`
 
   &:first-of-type > input {
     border-right: 0.9px solid var(--clr-input-decor);
-    padding-left: 66px;
+    padding-left: 74px;
   }
 `;
 
 export const FilterInput = styled.input`
   display: block;
   position: relative;
-  padding: 12px 18px 12px 44px;
+  padding: 12px 18px 12px 52px;
   width: 160px;
   height: 48px;
 

@@ -12,33 +12,17 @@ const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [localFilters, setLocalFilters] = useState({});
 
-  console.log(localFilters);
-
   const params = Object.fromEntries(searchParams);
-  const areFiltersSet = Object.values(localFilters).some((option) => option);
   const areParamsSet = Object.values(params).some((option) => option);
 
-  const whetherFiltersChanged = !deepEqual(
-    localFilters.brand
-      ? { ...localFilters, brand: localFilters.brand.toLowerCase() }
-      : localFilters,
-    params
-  );
-
+  const whetherFiltersChanged = !deepEqual(localFilters, params);
+  console.log(localFilters);
   const handleSearchClick = () => {
-    if (areFiltersSet && whetherFiltersChanged) {
-      // setSearchParams({
-      //   ...localFilters,mileage{}
-      //   from: localFilters.mileage.from,
-      //   to: localFilters.mileage.from,
-      // });
+    if (whetherFiltersChanged) {
       setSearchParams(localFilters);
-      console.clear();
-      console.table({ areFiltersSet, whetherFiltersChanged });
     }
   };
 
-  console.table(localFilters);
   return (
     <FiltersContainer>
       <FiltersList>

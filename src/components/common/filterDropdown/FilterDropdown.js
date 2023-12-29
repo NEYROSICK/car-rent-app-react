@@ -24,7 +24,8 @@ const FilterDropdown = ({
       );
       return index === -1 ? false : options[index];
     } else if (searchParamValue && parameter === "price") {
-      return searchParamValue;
+      const numberMatch = options.find((option) => option === searchParamValue);
+      return numberMatch ? searchParamValue : false;
     }
   }, [searchParamValue, options, parameter]);
 
@@ -46,12 +47,11 @@ const FilterDropdown = ({
       }));
     } else {
       setChosenOption(dropdownDefault);
-      console.table({ searchParamValue, optionOriginalName });
     }
 
     if (!areParamsSet) {
       setChosenOption(dropdownDefault);
-      setLocalFilters({ from: "", to: "" });
+      setLocalFilters({});
     }
   }, [
     searchParamValue,

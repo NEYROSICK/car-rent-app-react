@@ -2,49 +2,107 @@ import PropTypes from "prop-types";
 import { FilterInput, FilterInputBlock, FilterInputContainer, Title } from "./filterInputs.styled";
 import debounce from "lodash.debounce";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const FilterInputs = ({ localFilters, setLocalFilters }) => {
-  // const [searchParams] = useSearchParams();
-  // const searchParamValue = searchParams.get(parameter);
+  // const [inputState, setInputState] = useState({});
+  const [searchParams] = useSearchParams();
+  const fromParamValue = searchParams.get("from");
+  const toParamValue = searchParams.get("to");
 
-  // useEffect(() => {
-  //   if (searchParamValue && typeof searchParamValue === 'number') {
-  //     setLocalFilters((prevLocalFilters) => ({
-  //       ...prevLocalFilters,
-  //       [parameter]: { [name]: value },
-  //     }));
-  //   }
-  // },[])
+  useEffect(() => {
+    if (fromParamValue && typeof Number(fromParamValue) === "number") {
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        from: fromParamValue,
+      }));
+    } else if (fromParamValue && typeof Number(fromParamValue) !== "number") {
+      setLocalFilters((prevLocalFilters) => {
+        const { from, ...rest } = prevLocalFilters;
+        return rest;
+      });
+    }
+
+    if (toParamValue && typeof Number(toParamValue) === "number") {
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        to: toParamValue,
+      }));
+    } else if (toParamValue && typeof Number(toParamValue) !== "number") {
+      setLocalFilters((prevLocalFilters) => {
+        const { to, ...rest } = prevLocalFilters;
+        return rest;
+      });
+    }
+  }, [fromParamValue, toParamValue, setLocalFilters]);
+
+  // const handleLocalFiltersChange = (name, value) => {
+  //   setLocalFilters((prevLocalFilters) => ({
+  //     ...prevLocalFilters,
+  //     [name]: value,
+  //   }));
+  // };
+
+  // const debouncedChange = debounce(handleLocalFiltersChange, 300);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setLocalFilters((prevLocalFilters) => ({
-      ...prevLocalFilters,
-      [name]: value,
-    }));
+    // console.log(!!Number(value));
+    // if (!!Number(value) && typeof Number(value) === "number") {
+    // setInputState({ [name]: value });
+    // debouncedChange(name, value);
+    if (value && isStringOnlyNumbers(value.split(" ").join(""))) {
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        [name]: value.split(" ").join(""),
+      }));
+    }
+
+    if (!value) {
+      setLocalFilters((prevLocalFilters) => {
+        const { [name]: paramName, ...rest } = prevLocalFilters;
+        return rest;
+      });
+    }
+
+    // }
   };
 
-  const debouncedChange = debounce(handleFilterChange, 300);
+  // console.log(inputState);
+
+  function formatNumberWithSpaces(number) {
+    // if (typeof number !== "number") {
+    //   return "Invalid input. Please provide a number.";
+    // }
+    if (number) {
+      // const numberString = number.split(" ").join("");
+      const formattedNumber = number.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return formattedNumber;
+    }
+  }
+
+  function isStringOnlyNumbers(inputString) {
+    return /^\d+$/.test(inputString);
+  }
 
   return (
     <div>
       <Title>Сar mileage / km</Title>
       <FilterInputContainer>
         <FilterInputBlock>
-          <span>From</span>
+          <span>From:</span>
           <FilterInput
-            type="number"
-            value={localFilters.from ?? ""}
+            type="text"
+            value={formatNumberWithSpaces(localFilters.from) ?? ""}
             name="from"
             onChange={handleFilterChange}
           />
         </FilterInputBlock>
         <FilterInputBlock>
-          <span>To</span>
+          <span>To:</span>
           <FilterInput
-            type="number"
-            value={localFilters.to ?? ""}
+            type="text"
+            value={formatNumberWithSpaces(localFilters.to) ?? ""}
             name="to"
             onChange={handleFilterChange}
           />
