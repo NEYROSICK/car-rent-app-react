@@ -18,7 +18,9 @@
 
   /*brand color*/
   --clr-brand: #3470ff;
+  --clr-brand-red: #ff2121;
   --clr-hover: #0b44cd;
+  --clr-hover-red: #d80000;
 
   /*other colors*/
   --clr-input-decor: rgba(138, 138, 137, 0.2);

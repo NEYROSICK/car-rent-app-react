@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const ParamContainer = styled.div`
   position: relative;
-
   & > p {
     font-size: 14px;
     font-weight: 500;
@@ -58,8 +57,6 @@ export const OptionList = styled.ul`
     parameter === "price" &&
     `width: 125px;    
     height: 190px;`}
-
-  z-index: 2;
 
   padding: 14px 8px;
 

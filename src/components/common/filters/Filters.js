@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FiltersContainer, FiltersList } from "./filters.styled";
+import { useEffect, useState } from "react";
+import { ButtonContainer, FiltersContainer, FiltersList } from "./filters.styled";
 import { useSearchParams } from "react-router-dom";
 import brands from "../../../assets/carBrands.json";
 import prices from "../../../assets/carPrices.json";
@@ -7,6 +7,7 @@ import Button from "../button/Button";
 import FilterDropdown from "../filterDropdown/FilterDropdown";
 import { deepEqual } from "../../../helpers/deepEqual";
 import FilterInputs from "../filterInputs/FilterInputs";
+import IconClose from "../icons/IconClose";
 
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,17 +15,23 @@ const Filters = () => {
 
   const params = Object.fromEntries(searchParams);
   const areParamsSet = Object.values(params).some((option) => option);
+  const areLocalFiltersSet = Object.values(localFilters).some((option) => option);
 
   const whetherFiltersChanged = !deepEqual(localFilters, params);
-  console.log(localFilters);
+
   const handleSearchClick = () => {
     if (whetherFiltersChanged) {
       setSearchParams(localFilters);
     }
   };
 
+  const handleCloseClick = () => {
+    setLocalFilters({});
+    setSearchParams({});
+  };
+
   return (
-    <FiltersContainer>
+    <FiltersContainer areLocalFiltersSet={areLocalFiltersSet}>
       <FiltersList>
         <FilterDropdown
           options={brands}
@@ -34,6 +41,7 @@ const Filters = () => {
           title={"Car brand"}
           dropdownDefault={"Select a brand"}
           areParamsSet={areParamsSet}
+          areLocalFiltersSet={areLocalFiltersSet}
         />
 
         <FilterDropdown
@@ -44,13 +52,22 @@ const Filters = () => {
           title={"Price/ 1 hour"}
           dropdownDefault={"To $"}
           areParamsSet={areParamsSet}
+          areLocalFiltersSet={areLocalFiltersSet}
         />
 
         <FilterInputs localFilters={localFilters} setLocalFilters={setLocalFilters} />
-
-        <Button variant="search" onClick={handleSearchClick}>
-          Search
-        </Button>
+        <ButtonContainer>
+          <Button variant="search" onClick={handleSearchClick}>
+            Search
+          </Button>
+          <Button
+            variant="close"
+            onClick={handleCloseClick}
+            areLocalFiltersSet={areLocalFiltersSet}
+          >
+            <IconClose />
+          </Button>
+        </ButtonContainer>
       </FiltersList>
     </FiltersContainer>
   );

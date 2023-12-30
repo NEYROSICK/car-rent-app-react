@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { OptionItem, OptionList, ParamContainer, SelectBtn } from "./filterDropwown.styled";
+import { OptionItem, OptionList, ParamContainer, SelectBtn } from "./filterDropdown.styled";
 import IconChevron from "../icons/IconChevron";
 import { useSearchParams } from "react-router-dom";
 import { nanoid } from "nanoid";
@@ -12,6 +12,7 @@ const FilterDropdown = ({
   parameter,
   options,
   setLocalFilters,
+  areLocalFiltersSet,
 }) => {
   const [searchParams] = useSearchParams();
   const searchParamValue = searchParams.get(parameter);
@@ -61,6 +62,12 @@ const FilterDropdown = ({
     setLocalFilters,
     areParamsSet,
   ]);
+
+  useEffect(() => {
+    if (!areLocalFiltersSet) {
+      setChosenOption(dropdownDefault);
+    }
+  }, [dropdownDefault, areLocalFiltersSet]);
 
   useEffect(() => {
     if (isDropdownOpen && scrollToRef.current) {

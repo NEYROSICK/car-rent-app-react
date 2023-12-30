@@ -27,9 +27,37 @@ export const ButtonStyled = styled.button`
   ${({ variant }) =>
     variant === "search" &&
     `
-    max-width: 136px;
+    position: relative;
+    width: 136px;
     height: 48px;
+    z-index: 1;
   `}
+
+  ${({ variant }) =>
+    variant === "close" &&
+    `
+    position: absolute;
+    top: 0;
+    right: 1px;
+    width: 48px;
+    height: 48px;
+    background-color: var(--clr-brand-red);
+    z-index: 0;
+    transition: transform 0.5s cubic-bezier(.17,1.26,.54,1.19);
+    
+    & > svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--clr-primary-inv)
+    }
+
+    &:hover {
+      background-color: var(--clr-hover-red);
+    }
+  `}
+
+  ${({ areLocalFiltersSet }) => areLocalFiltersSet && `transform: translateX(66px);`}
+
 
   ${({ variant }) =>
     variant === "rental" &&
