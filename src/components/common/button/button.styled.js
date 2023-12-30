@@ -43,16 +43,22 @@ export const ButtonStyled = styled.button`
     height: 48px;
     background-color: var(--clr-brand-red);
     z-index: 0;
-    transition: transform 0.5s cubic-bezier(.17,1.26,.54,1.19);
+    transition: transform 0.5s cubic-bezier(.17,1.26,.54,1.19), background-color 0.3s;
     
     & > svg {
       width: 20px;
       height: 20px;
-      fill: var(--clr-primary-inv)
+      fill: var(--clr-primary-inv);
+      transition: transform 0.3s cubic-bezier(0.65, 1.79, 0.78, 1.02);
+
     }
 
     &:hover {
       background-color: var(--clr-hover-red);
+
+      & > svg {
+        transform: rotate(180deg) scale(1.2);
+      }
     }
   `}
 

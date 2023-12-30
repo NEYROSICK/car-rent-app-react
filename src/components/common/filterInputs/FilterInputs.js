@@ -1,40 +1,58 @@
 import PropTypes from "prop-types";
 import { FilterInput, FilterInputBlock, FilterInputContainer, Title } from "./filterInputs.styled";
-import debounce from "lodash.debounce";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useDebounce from "../../../hooks/useDebounce";
+// import { useDebounce } from "use-debounce";
 
 const FilterInputs = ({ localFilters, setLocalFilters }) => {
-  // const [inputState, setInputState] = useState({});
+  const [inputFromValue, setInputFromValue] = useState("");
+  const [inputToValue, setInputToValue] = useState("");
   const [searchParams] = useSearchParams();
   const fromParamValue = searchParams.get("from");
   const toParamValue = searchParams.get("to");
+  const debouncedFrom = useDebounce(inputFromValue);
+  const debouncedTo = useDebounce(inputToValue);
+
+  // useEffect(() => {
+  //   if (fromParamValue && typeof Number(fromParamValue) === "number") {
+  //     setLocalFilters((prevLocalFilters) => ({
+  //       ...prevLocalFilters,
+  //       from: fromParamValue,
+  //     }));
+  //   } else if (fromParamValue && typeof Number(fromParamValue) !== "number") {
+  //     setLocalFilters((prevLocalFilters) => {
+  //       const { from, ...rest } = prevLocalFilters;
+  //       return rest;
+  //     });
+  //   }
+
+  //   if (toParamValue && typeof Number(toParamValue) === "number") {
+  //     setLocalFilters((prevLocalFilters) => ({
+  //       ...prevLocalFilters,
+  //       to: toParamValue,
+  //     }));
+  //   } else if (toParamValue && typeof Number(toParamValue) !== "number") {
+  //     setLocalFilters((prevLocalFilters) => {
+  //       const { to, ...rest } = prevLocalFilters;
+  //       return rest;
+  //     });
+  //   }
+  // }, [fromParamValue, toParamValue, setLocalFilters]);
 
   useEffect(() => {
-    if (fromParamValue && typeof Number(fromParamValue) === "number") {
-      setLocalFilters((prevLocalFilters) => ({
-        ...prevLocalFilters,
-        from: fromParamValue,
-      }));
-    } else if (fromParamValue && typeof Number(fromParamValue) !== "number") {
-      setLocalFilters((prevLocalFilters) => {
-        const { from, ...rest } = prevLocalFilters;
-        return rest;
-      });
-    }
+    setLocalFilters((prevLocalFilters) => ({
+      ...prevLocalFilters,
+      from: debouncedFrom,
+    }));
+  }, [debouncedFrom, setLocalFilters]);
 
-    if (toParamValue && typeof Number(toParamValue) === "number") {
-      setLocalFilters((prevLocalFilters) => ({
-        ...prevLocalFilters,
-        to: toParamValue,
-      }));
-    } else if (toParamValue && typeof Number(toParamValue) !== "number") {
-      setLocalFilters((prevLocalFilters) => {
-        const { to, ...rest } = prevLocalFilters;
-        return rest;
-      });
-    }
-  }, [fromParamValue, toParamValue, setLocalFilters]);
+  useEffect(() => {
+    setLocalFilters((prevLocalFilters) => ({
+      ...prevLocalFilters,
+      to: debouncedTo,
+    }));
+  }, [debouncedTo, setLocalFilters]);
 
   // const handleLocalFiltersChange = (name, value) => {
   //   setLocalFilters((prevLocalFilters) => ({
@@ -47,15 +65,22 @@ const FilterInputs = ({ localFilters, setLocalFilters }) => {
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    // console.log(!!Number(value));
-    // if (!!Number(value) && typeof Number(value) === "number") {
-    // setInputState({ [name]: value });
-    // debouncedChange(name, value);
-    if (value && isStringOnlyNumbers(value.split(" ").join(""))) {
-      setLocalFilters((prevLocalFilters) => ({
-        ...prevLocalFilters,
-        [name]: value.split(" ").join(""),
-      }));
+    console.log(name, value);
+
+    if (name === "from" && value && isStringOnlyNumbers(value.split(" ").join(""))) {
+      // setLocalFilters((prevLocalFilters) => ({
+      //   ...prevLocalFilters,
+      //   from: value.split(" ").join(""),
+      // }));
+      setInputFromValue(value.split(" ").join(""));
+    }
+
+    if (name === "to" && value && isStringOnlyNumbers(value.split(" ").join(""))) {
+      // setLocalFilters((prevLocalFilters) => ({
+      //   ...prevLocalFilters,
+      //   [name]: value.split(" ").join(""),
+      // }));
+      setInputToValue(value.split(" ").join(""));
     }
 
     if (!value) {
@@ -64,18 +89,13 @@ const FilterInputs = ({ localFilters, setLocalFilters }) => {
         return rest;
       });
     }
-
-    // }
   };
-
-  // console.log(inputState);
 
   function formatNumberWithSpaces(number) {
     // if (typeof number !== "number") {
     //   return "Invalid input. Please provide a number.";
     // }
     if (number) {
-      // const numberString = number.split(" ").join("");
       const formattedNumber = number.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
       return formattedNumber;
     }
@@ -93,8 +113,10 @@ const FilterInputs = ({ localFilters, setLocalFilters }) => {
           <span>From:</span>
           <FilterInput
             type="text"
-            value={formatNumberWithSpaces(localFilters.from) ?? ""}
+            value={formatNumberWithSpaces(inputFromValue) ?? ""}
             name="from"
+            readonly
+            autoComplete="off"
             onChange={handleFilterChange}
           />
         </FilterInputBlock>
@@ -102,8 +124,10 @@ const FilterInputs = ({ localFilters, setLocalFilters }) => {
           <span>To:</span>
           <FilterInput
             type="text"
-            value={formatNumberWithSpaces(localFilters.to) ?? ""}
+            value={formatNumberWithSpaces(inputToValue) ?? ""}
             name="to"
+            readonly
+            autoComplete="off"
             onChange={handleFilterChange}
           />
         </FilterInputBlock>

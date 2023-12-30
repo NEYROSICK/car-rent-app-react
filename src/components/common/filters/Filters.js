@@ -12,6 +12,7 @@ import IconClose from "../icons/IconClose";
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [localFilters, setLocalFilters] = useState({});
+  // console.log(localFilters);
 
   const params = Object.fromEntries(searchParams);
   const areParamsSet = Object.values(params).some((option) => option);
