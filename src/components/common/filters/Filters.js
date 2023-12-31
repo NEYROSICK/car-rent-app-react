@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ButtonContainer, FiltersContainer, FiltersList } from "./filters.styled";
 import { useSearchParams } from "react-router-dom";
 import brands from "../../../assets/carBrands.json";
@@ -12,12 +12,10 @@ import IconClose from "../icons/IconClose";
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [localFilters, setLocalFilters] = useState({});
-  console.table(localFilters);
 
   const params = Object.fromEntries(searchParams);
   const areParamsSet = Object.values(params).some((option) => option);
   const areLocalFiltersSet = Object.values(localFilters).some((option) => option);
-
   const whetherFiltersChanged = !deepEqual(localFilters, params);
 
   const handleSearchClick = () => {
@@ -56,7 +54,7 @@ const Filters = () => {
           areLocalFiltersSet={areLocalFiltersSet}
         />
 
-        <FilterInputs localFilters={localFilters} setLocalFilters={setLocalFilters} />
+        <FilterInputs setLocalFilters={setLocalFilters} />
         <ButtonContainer>
           <Button variant="search" onClick={handleSearchClick}>
             Search

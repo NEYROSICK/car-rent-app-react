@@ -12,7 +12,6 @@ const FilterDropdown = ({
   parameter,
   options,
   setLocalFilters,
-  areLocalFiltersSet,
 }) => {
   const [searchParams] = useSearchParams();
   const searchParamValue = searchParams.get(parameter);
@@ -62,12 +61,6 @@ const FilterDropdown = ({
     setLocalFilters,
     areParamsSet,
   ]);
-
-  useEffect(() => {
-    if (!areLocalFiltersSet) {
-      setChosenOption(dropdownDefault);
-    }
-  }, [dropdownDefault, areLocalFiltersSet]);
 
   useEffect(() => {
     if (isDropdownOpen && scrollToRef.current) {

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { setAdverts } from "../../../redux/slices/advertSlice";
 import { fetchAdverts } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
+import { Message } from "./filteredList.styled";
+import IconKeys from "../../common/icons/IconKeys";
 
 const FilteredList = ({ params }) => {
   const adverts = useSelector(getAdverts);
@@ -62,7 +64,10 @@ const FilteredList = ({ params }) => {
     return (
       <>
         {!filteredAdverts.length && !isLoading && (
-          <p>Sorry, there are no matches for your request :(</p>
+          <Message>
+            <IconKeys />
+            Sorry, there are no matches for your request :(
+          </Message>
         )}
 
         {!!filteredAdverts.length && (

@@ -56,13 +56,4 @@ export const FilterInput = styled.input`
   &:focus {
     outline: none;
   }
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  -moz-appearance: textfield;
-  -ms-inner-appearance: none;
 `;
