@@ -10,13 +10,16 @@ import { Message } from "./filteredList.styled";
 import IconKeys from "../../common/icons/IconKeys";
 
 const FilteredList = ({ params }) => {
+  const LIMIT = 12;
   const adverts = useSelector(getAdverts);
   const isLoading = useSelector(getIsLoading);
-  const generalCount = useSelector(getGeneralCount);
-  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const [filteredAdverts, setFilteredAdverts] = useState(null);
+  const [filteredAdverts, setFilteredAdverts] = useState([]);
+  const [limitedAdverts, setLimitedAdverts] = useState([]);
   const { brand, price, from, to } = params;
+  const [skip, setSkip] = useState(LIMIT);
+  const filteredLength = filteredAdverts.length;
+  const limitedLength = limitedAdverts.length;
 
   useEffect(() => {
     dispatch(fetchAdverts({}));
@@ -54,45 +57,43 @@ const FilteredList = ({ params }) => {
     };
 
     setFilteredAdverts(filterAdverts());
+    setSkip(LIMIT);
   }, [adverts, brand, price, from, to]);
 
+  useEffect(() => {
+    setLimitedAdverts(filteredAdverts.slice(0, skip));
+  }, [filteredAdverts, skip]);
+
   const handleClick = () => {
-    setPage(page + 1);
+    setSkip(skip + LIMIT);
   };
 
-  if (filteredAdverts) {
-    return (
-      <>
-        {!filteredAdverts.length && !isLoading && (
-          <Message>
-            <IconKeys />
-            Sorry, there are no matches for your request :(
-          </Message>
-        )}
+  return (
+    <>
+      {Boolean(!limitedLength) && !isLoading && (
+        <Message>
+          <IconKeys />
+          Sorry, there are no matches for your request :(
+        </Message>
+      )}
 
-        {!!filteredAdverts.length && (
-          <>
-            <CardList>
-              {filteredAdverts.map((advert) => (
-                <Card item={advert} key={advert.id} />
-              ))}
-            </CardList>
-            {filteredAdverts.length < generalCount && (
-              <>
-                {isLoading ? (
-                  <Loader variant="pagination" size={90} />
-                ) : (
-                  <BtnPagination onClick={handleClick}>Load more</BtnPagination>
-                )}
-              </>
-            )}
-          </>
-        )}
+      {Boolean(limitedLength) && (
+        <>
+          <CardList>
+            {limitedAdverts.map((advert) => (
+              <Card item={advert} key={advert.id} />
+            ))}
+          </CardList>
 
-        {isLoading && <Loader variant="initialization" size={90} />}
-      </>
-    );
-  }
+          {filteredLength > 12 && limitedLength < filteredLength && (
+            <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+          )}
+        </>
+      )}
+
+      {isLoading && <Loader variant="initialization" size={90} />}
+    </>
+  );
 };
 
 export default FilteredList;

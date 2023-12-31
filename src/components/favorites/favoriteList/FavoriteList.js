@@ -15,9 +15,9 @@ const FavoriteList = () => {
   const isLoading = useSelector(getIsLoading);
   const [favoriteAdverts, setFavoriteAdverts] = useState([]);
   const [limitedAdverts, setLimitedAdverts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [skip, setSkip] = useState(12);
-  const { length: advertsLength } = favoriteAdverts;
+  const limit = 12;
+  const [skip, setSkip] = useState(limit);
+  const { length: favoriteAdvertsLength } = favoriteAdverts;
   const { length: limitedAdvertsLength } = limitedAdverts;
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const FavoriteList = () => {
     setLimitedAdverts(favoriteAdverts.slice(0, skip));
   }, [favoriteAdverts, skip]);
 
-  useEffect(() => {
-    setSkip(page * 12);
-  }, [page]);
+  const handleClick = () => {
+    setSkip(skip + limit);
+  };
 
   return (
     <>
@@ -57,8 +57,8 @@ const FavoriteList = () => {
             ))}
           </CardList>
 
-          {advertsLength > 12 && limitedAdvertsLength < advertsLength && (
-            <BtnPagination onClick={() => setPage(page + 1)}>Load more</BtnPagination>
+          {favoriteAdvertsLength > limit && limitedAdvertsLength < favoriteAdvertsLength && (
+            <BtnPagination onClick={handleClick}>Load more</BtnPagination>
           )}
         </>
       )}
