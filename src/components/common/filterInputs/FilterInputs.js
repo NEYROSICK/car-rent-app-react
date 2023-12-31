@@ -41,68 +41,54 @@ const FilterInputs = ({ localFilters, setLocalFilters }) => {
   // }, [fromParamValue, toParamValue, setLocalFilters]);
 
   useEffect(() => {
-    setLocalFilters((prevLocalFilters) => ({
-      ...prevLocalFilters,
-      from: debouncedFrom,
-    }));
+    if (debouncedFrom) {
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        from: debouncedFrom,
+      }));
+    } else {
+      setLocalFilters((prevLocalFilters) => {
+        const { from, ...rest } = prevLocalFilters;
+        return rest;
+      });
+    }
   }, [debouncedFrom, setLocalFilters]);
 
   useEffect(() => {
-    setLocalFilters((prevLocalFilters) => ({
-      ...prevLocalFilters,
-      to: debouncedTo,
-    }));
+    if (debouncedTo) {
+      setLocalFilters((prevLocalFilters) => ({
+        ...prevLocalFilters,
+        to: debouncedTo,
+      }));
+    } else {
+      setLocalFilters((prevLocalFilters) => {
+        const { to, ...rest } = prevLocalFilters;
+        return rest;
+      });
+    }
   }, [debouncedTo, setLocalFilters]);
-
-  // const handleLocalFiltersChange = (name, value) => {
-  //   setLocalFilters((prevLocalFilters) => ({
-  //     ...prevLocalFilters,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const debouncedChange = debounce(handleLocalFiltersChange, 300);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    const validNumber = value.split(" ").join("");
 
-    if (name === "from" && value && isStringOnlyNumbers(value.split(" ").join(""))) {
-      // setLocalFilters((prevLocalFilters) => ({
-      //   ...prevLocalFilters,
-      //   from: value.split(" ").join(""),
-      // }));
-      setInputFromValue(value.split(" ").join(""));
+    if (name === "from" && isStringNumbersOrEmpty(validNumber)) {
+      setInputFromValue(validNumber);
     }
 
-    if (name === "to" && value && isStringOnlyNumbers(value.split(" ").join(""))) {
-      // setLocalFilters((prevLocalFilters) => ({
-      //   ...prevLocalFilters,
-      //   [name]: value.split(" ").join(""),
-      // }));
-      setInputToValue(value.split(" ").join(""));
-    }
-
-    if (!value) {
-      setLocalFilters((prevLocalFilters) => {
-        const { [name]: paramName, ...rest } = prevLocalFilters;
-        return rest;
-      });
+    if (name === "to" && isStringNumbersOrEmpty(validNumber)) {
+      setInputToValue(validNumber);
     }
   };
 
   function formatNumberWithSpaces(number) {
-    // if (typeof number !== "number") {
-    //   return "Invalid input. Please provide a number.";
-    // }
     if (number) {
-      const formattedNumber = number.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-      return formattedNumber;
+      return Number(number).toLocaleString();
     }
   }
 
-  function isStringOnlyNumbers(inputString) {
-    return /^\d+$/.test(inputString);
+  function isStringNumbersOrEmpty(inputString) {
+    return /^[0-9]*$/.test(inputString);
   }
 
   return (
