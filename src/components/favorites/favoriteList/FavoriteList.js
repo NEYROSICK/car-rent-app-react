@@ -1,69 +1,117 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdverts, getFavorites, getIsLoading } from "../../../redux/selectors";
+import { getFavoriteAdverts, getFavorites, getIsFavoritesLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
 import { BtnPagination, CardList, Message } from "./favoriteList.styled";
-import { fetchAdverts } from "../../../redux/operations";
-import { setAdverts } from "../../../redux/slices/advertSlice";
+import { fetchAdvertsAll } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
 import IconKeys from "../../common/icons/IconKeys";
+import { useSearchParams } from "react-router-dom";
+import { setFavorites } from "../../../redux/slices/favoriteSlice";
 
 const FavoriteList = () => {
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
-  const adverts = useSelector(getAdverts);
-  const isLoading = useSelector(getIsLoading);
+  const adverts = useSelector(getFavoriteAdverts);
+  const isLoading = useSelector(getIsFavoritesLoading);
   const [favoriteAdverts, setFavoriteAdverts] = useState([]);
+  const [filteredAdverts, setFilteredAdverts] = useState([]);
   const [limitedAdverts, setLimitedAdverts] = useState([]);
-  const limit = 12;
-  const [skip, setSkip] = useState(limit);
-  const { length: favoriteAdvertsLength } = favoriteAdverts;
-  const { length: limitedAdvertsLength } = limitedAdverts;
+  const LIMIT = 12;
+  const [skip, setSkip] = useState(LIMIT);
+  const [searchParams] = useSearchParams();
+  const params = Object.fromEntries(searchParams);
+  const areFiltersSet = Object.values(params).some((option) => option);
+  const { brand, price, from, to } = params;
+  const [isAdvertsFound, setIsAdvertsFound] = useState(true);
+  const [areFavoriteAdsSet, setAreFavoriteAdsSet] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchAdverts({}));
+    dispatch(fetchAdvertsAll());
 
     return () => {
-      dispatch(setAdverts([]));
+      dispatch(setFavorites([]));
     };
   }, [dispatch]);
 
   useEffect(() => {
     setFavoriteAdverts(adverts.filter((advert) => favorites.includes(advert.id)));
+    if (favorites.length) {
+      setAreFavoriteAdsSet(true);
+    } else {
+      setAreFavoriteAdsSet(false);
+    }
   }, [favorites, adverts]);
 
   useEffect(() => {
-    setLimitedAdverts(favoriteAdverts.slice(0, skip));
-  }, [favoriteAdverts, skip]);
+    const filterAdverts = () => {
+      return favoriteAdverts
+        .filter(({ make }) => !brand || make.toLowerCase() === brand.toLowerCase())
+        .filter(({ rentalPrice }) => !price || rentalPrice.split("$").join("") <= Number(price))
+        .filter(({ mileage }) => !from || mileage >= Number(from))
+        .filter(({ mileage }) => !to || mileage <= Number(to));
+    };
+
+    setFilteredAdverts(filterAdverts());
+    setSkip(LIMIT);
+  }, [favoriteAdverts, brand, price, from, to]);
+
+  useEffect(() => {
+    if (!areFiltersSet) {
+      setLimitedAdverts(favoriteAdverts.slice(0, skip));
+    } else {
+      setLimitedAdverts(filteredAdverts.slice(0, skip));
+    }
+  }, [favoriteAdverts, filteredAdverts, skip, areFiltersSet]);
+
+  useEffect(() => {
+    if (!limitedAdverts.length) {
+      setTimeout(() => {
+        setIsAdvertsFound(false);
+      }, 300);
+    }
+  }, [limitedAdverts]);
 
   const handleClick = () => {
-    setSkip(skip + limit);
+    setSkip(skip + LIMIT);
   };
 
   return (
     <>
-      {Boolean(!limitedAdvertsLength && !isLoading) && (
-        <Message>
-          <IconKeys />
-          There are no favorite adverts. Try to add some ;)
-        </Message>
-      )}
-
-      {Boolean(limitedAdvertsLength) && (
+      {Boolean(limitedAdverts.length) && (
         <>
           <CardList>
             {limitedAdverts.map((item) => (
               <Card item={item} key={item.id} />
             ))}
           </CardList>
-
-          {favoriteAdvertsLength > limit && limitedAdvertsLength < favoriteAdvertsLength && (
-            <BtnPagination onClick={handleClick}>Load more</BtnPagination>
-          )}
         </>
       )}
 
-      {isLoading && <Loader variant="favorites" size={90} isFiltersShown={favorites.length} />}
+      {!areFiltersSet &&
+        favoriteAdverts.length > LIMIT &&
+        limitedAdverts.length < favoriteAdverts.length &&
+        Boolean(limitedAdverts.length) && (
+          <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+        )}
+
+      {areFiltersSet &&
+        favoriteAdverts.length > LIMIT &&
+        limitedAdverts.length < favoriteAdverts.length &&
+        limitedAdverts.length === LIMIT && (
+          <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+        )}
+
+      {Boolean(!isLoading && !limitedAdverts.length && !isAdvertsFound) && (
+        <Message areFavoriteAdsSet={areFavoriteAdsSet}>
+          <IconKeys />
+          Sorry, there are no favorite adverts or matches for your request :(
+        </Message>
+      )}
+
+      {isLoading && !limitedAdverts.length && (
+        <Loader variant="favorites" size={90} isFiltersShown={favorites.length} />
+      )}
     </>
   );
 };

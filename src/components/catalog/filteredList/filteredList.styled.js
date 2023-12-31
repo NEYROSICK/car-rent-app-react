@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 export const Message = styled.p`
-  /* height: calc(100vh - 317.6px); */
   min-height: calc(100vh - 440px);
 
   display: flex;

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
+import { getAdverts, getIsLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
 import { CardList, BtnPagination } from "../advertList/advertList.styled";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ const FilteredList = ({ params }) => {
   const dispatch = useDispatch();
   const [filteredAdverts, setFilteredAdverts] = useState([]);
   const [limitedAdverts, setLimitedAdverts] = useState([]);
-  const { brand, price, from, to } = params;
   const [skip, setSkip] = useState(LIMIT);
+  const { brand, price, from, to } = params;
   const filteredLength = filteredAdverts.length;
   const limitedLength = limitedAdverts.length;
 
@@ -31,29 +31,11 @@ const FilteredList = ({ params }) => {
 
   useEffect(() => {
     const filterAdverts = () => {
-      let filteredList = adverts;
-
-      if (brand) {
-        filteredList = filteredList.filter(({ make }) => {
-          return make.toLowerCase() === brand.toLowerCase();
-        });
-      }
-
-      if (price) {
-        filteredList = filteredList.filter(
-          ({ rentalPrice }) => rentalPrice.split("$").join("") <= Number(price)
-        );
-      }
-
-      if (from) {
-        filteredList = filteredList.filter(({ mileage }) => mileage >= Number(from));
-      }
-
-      if (to) {
-        filteredList = filteredList.filter(({ mileage }) => mileage <= Number(to));
-      }
-
-      return filteredList;
+      return adverts
+        .filter(({ make }) => !brand || make.toLowerCase() === brand.toLowerCase())
+        .filter(({ rentalPrice }) => !price || rentalPrice.split("$").join("") <= Number(price))
+        .filter(({ mileage }) => !from || mileage >= Number(from))
+        .filter(({ mileage }) => !to || mileage <= Number(to));
     };
 
     setFilteredAdverts(filterAdverts());
@@ -85,7 +67,7 @@ const FilteredList = ({ params }) => {
             ))}
           </CardList>
 
-          {filteredLength > 12 && limitedLength < filteredLength && (
+          {filteredLength > LIMIT && limitedLength < filteredLength && (
             <BtnPagination onClick={handleClick}>Load more</BtnPagination>
           )}
         </>

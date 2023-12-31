@@ -11,7 +11,7 @@ const FavoritesPage = () => {
     <Main>
       <Section>
         <Container>
-          {Boolean(favorites.length) && <Filters favorites />}
+          {Boolean(favorites.length) && <Filters />}
           <FavoriteList />
         </Container>
       </Section>

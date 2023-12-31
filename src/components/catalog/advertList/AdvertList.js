@@ -35,28 +35,25 @@ const AdvertList = () => {
     setPage(page + 1);
   };
 
-  if (!adverts.length) {
-    return <Loader variant="initialization" size={90} />;
-  } else {
-    return (
-      <>
+  return (
+    <>
+      {!adverts.length && <Loader variant="initialization" size={90} />}
+
+      {Boolean(adverts.length) && (
         <CardList>
           {adverts.map((advert) => (
             <Card item={advert} key={advert.id} />
           ))}
         </CardList>
-        {adverts.length < generalCount && (
-          <>
-            {isLoading ? (
-              <Loader variant="pagination" size={90} />
-            ) : (
-              <BtnPagination onClick={handleClick}>Load more</BtnPagination>
-            )}
-          </>
-        )}
-      </>
-    );
-  }
+      )}
+
+      {adverts.length < generalCount && !isLoading && (
+        <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+      )}
+
+      {adverts.length && isLoading && <Loader variant="pagination" size={90} />}
+    </>
+  );
 };
 
 export default AdvertList;

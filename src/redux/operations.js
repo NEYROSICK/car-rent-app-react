@@ -15,7 +15,7 @@ export const getAdvertCount = createAsyncThunk(
 );
 
 export const fetchAdverts = createAsyncThunk(
-  "adverts/fetchAll",
+  "adverts/fetch",
   async ({ page, limit }, { rejectWithValue }) => {
     try {
       const params = {
@@ -23,6 +23,18 @@ export const fetchAdverts = createAsyncThunk(
         page,
       };
       const response = await axios.get("/adverts", { params });
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchAdvertsAll = createAsyncThunk(
+  "favorites/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/adverts");
       return response.data;
     } catch (e) {
       return rejectWithValue(e.message);

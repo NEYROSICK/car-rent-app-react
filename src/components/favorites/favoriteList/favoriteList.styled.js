@@ -7,7 +7,8 @@ export const CardList = styled.ul`
 `;
 
 export const Message = styled.p`
-  height: calc(100vh - 193.6px);
+  ${({ areFavoriteAdsSet }) =>
+    areFavoriteAdsSet ? `min-height: calc(100vh - 420px);` : `height: calc(100vh - 193.6px);`}
 
   display: flex;
   flex-direction: column;
@@ -40,15 +41,16 @@ export const BtnPagination = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-  color: var(--clr-brand);
+  color: var(--clr-primary);
 
   background: transparent;
-  border: 2px solid transparent;
+  border: 2px solid var(--clr-primary);
   border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, color 0.3s;
 
   &:hover {
     border-color: var(--clr-brand);
+    color: var(--clr-brand);
   }
 `;

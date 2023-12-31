@@ -10,7 +10,7 @@ import persistStore from "redux-persist/es/persistStore";
 const favoritePersistConfig = {
   key: "favorites",
   storage,
-  whitelist: ["items"],
+  whitelist: ["idList"],
 };
 
 const rootReducer = combineReducers({

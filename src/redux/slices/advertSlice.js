@@ -14,6 +14,7 @@ const advertSlice = createSlice({
       state.isLoading = action.payload;
     },
     setAdverts(state, action) {
+      state.isLoading = true;
       state.items = action.payload;
     },
   },

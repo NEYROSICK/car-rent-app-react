@@ -40,8 +40,6 @@ export const NavList = styled.ul`
   width: 320px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
-  /* gap: 18px; */
 
   font-size: 16px;
   font-weight: 600;
@@ -64,17 +62,6 @@ export const NavList = styled.ul`
       fill: currentColor;
       transition: width 0.3s;
     }
-
-    /* &:hover {
-      gap: 10px;
-      background-color: var(--clr-brand);
-      border-color: var(--clr-brand);
-    }
-
-    &:hover > svg {
-      opacity: 1;
-      width: var(--svg-size-chevron);
-    } */
   }
 
   & > li:first-of-type {
