@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAdverts, getIsLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
-import { CardList, BtnPagination } from "../advertList/advertList.styled";
+import { CardList } from "../advertList/advertList.styled";
 import { useEffect, useState } from "react";
 import { setAdverts } from "../../../redux/slices/advertSlice";
 import { fetchAdverts } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
 import { Message } from "./filteredList.styled";
 import IconKeys from "../../common/icons/IconKeys";
+import Button from "../../common/button/Button";
 
 const FilteredList = ({ params }) => {
   const LIMIT = 12;
@@ -68,7 +69,9 @@ const FilteredList = ({ params }) => {
           </CardList>
 
           {filteredLength > LIMIT && limitedLength < filteredLength && (
-            <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+            <Button variant="pagination" onClick={handleClick}>
+              Load more
+            </Button>
           )}
         </>
       )}

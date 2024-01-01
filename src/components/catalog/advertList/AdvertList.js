@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAdverts, getGeneralCount, getIsLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
-import { CardList, BtnPagination } from "./advertList.styled";
+import { CardList } from "./advertList.styled";
 import { useEffect, useState } from "react";
 import { setAdverts } from "../../../redux/slices/advertSlice";
 import { fetchAdverts, getAdvertCount } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
 import { useSearchParams } from "react-router-dom";
+import Button from "../../common/button/Button";
 
 const AdvertList = () => {
   const dispatch = useDispatch();
@@ -48,10 +49,12 @@ const AdvertList = () => {
       )}
 
       {adverts.length < generalCount && !isLoading && (
-        <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+        <Button variant="pagination" onClick={handleClick}>
+          Load more
+        </Button>
       )}
 
-      {adverts.length && isLoading && <Loader variant="pagination" size={90} />}
+      {Boolean(adverts.length) && isLoading && <Loader variant="pagination" size={90} />}
     </>
   );
 };

@@ -70,4 +70,70 @@ export const ButtonStyled = styled.button`
     `
     max-width: auto;
   `}
+
+  ${({ variant }) =>
+    variant === "main" &&
+    `
+    width: 200px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--clr-primary-inv);
+
+    background: none;
+    border: 2px solid var(--clr-bcg);
+    border-radius: 14px;
+
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: white;
+      color: var(--clr-primary);
+    }
+  `}
+
+  ${({ variant }) =>
+    variant === "pagination" &&
+    `
+    width: 210px;
+    height: 48px;
+
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--clr-brand);
+
+    background: transparent;
+    border: 2px solid var(--clr-brand);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: var(--clr-brand);
+      border-color: var(--clr-brand);
+      color: var(--clr-primary-inv);
+    }
+  `}
+  
+  ${({ variant }) =>
+    variant === "learnMore" &&
+    `
+    order: 1;
+
+    &:hover + div > img {
+    transform: scale(1.1);
+  }
+  `}
 `;

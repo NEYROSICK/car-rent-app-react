@@ -30,7 +30,7 @@
   --scrollbar-filter-width: 8px;
   --scrollbar-border-radius: calc(var(--scrollbar-width) / 2);
   --svg-size-chevron: 20px;
-  --svg-size-heart: 18px;
+  --svg-size-heart: 20px;
   --svg-size-logo: 48px;
 }
 
@@ -64,6 +64,14 @@
   font-style: normal;
   font-weight: 500;
   src: url("./fonts/afacad-v1-latin-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Afacad";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/afacad-v1-latin-regular.woff2") format("woff2");
 }
 
 @font-face {

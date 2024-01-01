@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteAdverts, getFavorites, getIsFavoritesLoading } from "../../../redux/selectors";
 import Card from "../../common/card/Card";
-import { BtnPagination, CardList, Message } from "./favoriteList.styled";
+import { CardList, Message } from "./favoriteList.styled";
 import { fetchAdvertsAll } from "../../../redux/operations";
 import Loader from "../../common/loader/Loader";
 import IconKeys from "../../common/icons/IconKeys";
 import { useSearchParams } from "react-router-dom";
 import { setFavorites } from "../../../redux/slices/favoriteSlice";
+import Button from "../../common/button/Button";
 
 const FavoriteList = () => {
   const dispatch = useDispatch();
@@ -92,14 +93,18 @@ const FavoriteList = () => {
         favoriteAdverts.length > LIMIT &&
         limitedAdverts.length < favoriteAdverts.length &&
         Boolean(limitedAdverts.length) && (
-          <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+          <Button variant="pagination" onClick={handleClick}>
+            Load more
+          </Button>
         )}
 
       {areFiltersSet &&
         favoriteAdverts.length > LIMIT &&
         limitedAdverts.length < favoriteAdverts.length &&
         limitedAdverts.length === LIMIT && (
-          <BtnPagination onClick={handleClick}>Load more</BtnPagination>
+          <Button variant="pagination" onClick={handleClick}>
+            Load more
+          </Button>
         )}
 
       {Boolean(!isLoading && !limitedAdverts.length && !isAdvertsFound) && (

@@ -4,11 +4,13 @@ import { FilterInput, FilterInputBlock } from "../filterInputs.styled";
 import { useSearchParams } from "react-router-dom";
 import useDebounce from "../../../../hooks/useDebounce";
 
-const Input = ({ type, name, autoComplete, setLocalFilters }) => {
-  const [inputValue, setInputValue] = useState("");
+const Input = ({ type, name, autoComplete, localFilters, setLocalFilters }) => {
   const [searchParams] = useSearchParams();
-  const debouncedInputValue = useDebounce(inputValue);
   const paramValue = searchParams.get(name);
+  const [inputValue, setInputValue] = useState(
+    paramValue && isStringNumbersOrEmpty(paramValue) ? paramValue : ""
+  );
+  const debouncedInputValue = useDebounce(inputValue);
 
   useEffect(() => {
     if (paramValue && isStringNumbersOrEmpty(paramValue)) {
@@ -21,6 +23,12 @@ const Input = ({ type, name, autoComplete, setLocalFilters }) => {
       setInputValue("");
     }
   }, [paramValue, setLocalFilters, name]);
+
+  useEffect(() => {
+    if (!localFilters[name]) {
+      setInputValue("");
+    }
+  }, [localFilters, name]);
 
   useEffect(() => {
     if (debouncedInputValue) {
@@ -73,6 +81,7 @@ const Input = ({ type, name, autoComplete, setLocalFilters }) => {
 };
 
 Input.propTypes = {
+  localFilters: PropTypes.object.isRequired,
   setLocalFilters: PropTypes.func.isRequired,
 };
 

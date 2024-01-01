@@ -1,63 +1,64 @@
 import styled from "@emotion/styled";
-import wallpaper from "../../images/wallpaper.jpg";
-import { Link } from "react-router-dom";
+import backgroundPattern from "../../images/background-pattern.png";
 
 export const Main = styled.main`
-  background-image: url(${wallpaper});
-  background-size: cover;
-  background-position: center;
+  background-image: url(${backgroundPattern});
+  background-color: var(--clr-bcg-header);
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
   height: calc(100% - 93.6px);
   font-size: 18px;
 `;
 
-export const MainTitle = styled.h2`
-  font-size: 84px;
-  line-height: 84px;
-  text-transform: uppercase;
-  padding-top: 80px;
-  margin-bottom: 10px;
-  font-family: "Archivo Black", sans-serif;
-  text-align: center;
+export const Section = styled.section`
+  position: relative;
+  height: 100%;
+  padding: 30px 0;
 `;
 
-export const MainTagline = styled.h3`
-  font-size: 24px;
-  line-height: 24px;
-  letter-spacing: 10px;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-  font-family: "Archivo Black", sans-serif;
-  text-align: center;
+export const Img = styled.img`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-200px);
 `;
 
-export const MainDescr = styled.p`
-  color: var(--clr-brand);
-  font-weight: 500;
-  font-family: "Afacad", sans-serif;
-`;
-
-export const MainBtn = styled(Link)`
-  width: 200px;
-  height: 50px;
-
+export const MainContainer = styled.div`
+  min-height: calc(100% - 93.6px);
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+`;
 
-  font-weight: 600;
-  font-size: 16px;
+export const TitleContainer = styled.div`
+  padding: 52px 0;
+  width: 100vw;
+  backdrop-filter: blur(18px);
+  text-shadow: 1px 1px 1px #7d7d7d;
+`;
+
+export const MainTitle = styled.h2`
+  width: 700px;
+  font-size: 64px;
+  line-height: 74px;
+  font-family: "Archivo Black", sans-serif;
   color: var(--clr-primary-inv);
+  margin-bottom: 40px;
+`;
 
-  background: none;
-  border: 2px solid var(--clr-bcg);
-  border-radius: 14px;
+export const MainTagline = styled.p`
+  width: 450px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--clr-secondary-lt);
+  margin-bottom: 40px;
+`;
 
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
 
-  &:hover {
-    background-color: white;
-    color: var(--clr-primary);
-  }
+export const BrandColor = styled.span`
+  color: var(--clr-brand);
 `;

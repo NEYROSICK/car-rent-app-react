@@ -13,7 +13,7 @@ const Header = () => {
           <Title>
             <LogoLink to="/">
               <Logo />
-              CarSpace
+              <span>carspace</span>
             </LogoLink>
           </Title>
           <Nav>

@@ -14,19 +14,27 @@ export const HeaderContainer = styled.header`
 
 export const Title = styled.h1`
   font-family: "Afacad", sans-serif;
-  font-size: 32px;
+  font-weight: 500;
+  font-size: 40px;
   line-height: normal;
 `;
 
 export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   & svg {
     width: var(--svg-size-logo);
     height: var(--svg-size-logo);
     fill: var(--clr-primary-inv);
+  }
+
+  & > span {
+    display: flex;
+    align-self: flex-start;
+    line-height: 42px;
+    letter-spacing: -1px;
   }
 `;
 
@@ -37,7 +45,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavList = styled.ul`
-  width: 320px;
+  width: 380px;
   display: flex;
   align-items: center;
 
@@ -54,7 +62,7 @@ export const NavList = styled.ul`
 
     border: 1px solid var(--clr-bcg);
     border-radius: 14px;
-    transition: background-color 0.3s, border-color 0.3s, gap 0.3s;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s, gap 0.3s;
 
     & > svg {
       width: 0;
@@ -82,7 +90,18 @@ export const NavList = styled.ul`
     }
   }
 
+  & > li > a.active {
+    background-color: var(--clr-bcg);
+    border-color: var(--clr-bcg);
+    color: var(--clr-primary);
+  }
+
   & > li {
     flex-grow: 1;
+    transition: flex-grow 0.3s;
+  }
+
+  & > li:hover {
+    flex-grow: 2;
   }
 `;

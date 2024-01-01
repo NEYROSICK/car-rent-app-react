@@ -11,10 +11,10 @@ import IconClose from "../icons/IconClose";
 
 const Filters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [localFilters, setLocalFilters] = useState({});
-
   const params = Object.fromEntries(searchParams);
   const areParamsSet = Object.values(params).some((option) => option);
+  const [localFilters, setLocalFilters] = useState(areParamsSet ? params : {});
+
   const areLocalFiltersSet = Object.values(localFilters).some((option) => option);
   const whetherFiltersChanged = !deepEqual(localFilters, params);
 
@@ -54,7 +54,7 @@ const Filters = () => {
           areLocalFiltersSet={areLocalFiltersSet}
         />
 
-        <FilterInputs setLocalFilters={setLocalFilters} />
+        <FilterInputs localFilters={localFilters} setLocalFilters={setLocalFilters} />
         <ButtonContainer>
           <Button variant="search" onClick={handleSearchClick}>
             Search

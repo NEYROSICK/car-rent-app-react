@@ -9,10 +9,6 @@ export const CardContainer = styled.li`
   div > img {
     transition: transform 0.3s;
   }
-
-  &:hover div > img {
-    transform: scale(1.1);
-  }
 `;
 
 export const FavoriteBtn = styled.button`
@@ -90,6 +86,8 @@ export const Model = styled.span`
 `;
 
 export const AdditionalInfo = styled.ul`
+  height: 40px;
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   column-gap: 12px;

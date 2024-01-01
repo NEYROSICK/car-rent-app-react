@@ -30,6 +30,7 @@ const Card = ({ item }) => {
     type,
     id,
     accessories,
+    functionalities,
   } = item;
 
   const modalRoot = document.getElementById("modal");
@@ -47,6 +48,14 @@ const Card = ({ item }) => {
 
   return (
     <CardContainer>
+      <Button variant="learnMore" onClick={handleModalOpen}>
+        Learn more
+      </Button>
+
+      <ImgContainer>
+        <CarImg src={img} alt={brand} width={274} height={274} />
+      </ImgContainer>
+
       <FavoriteBtn
         id={id}
         favorites={favorites}
@@ -57,9 +66,6 @@ const Card = ({ item }) => {
         <IconHeart />
       </FavoriteBtn>
 
-      <ImgContainer>
-        <CarImg src={img} alt={brand} width={274} height={274} />
-      </ImgContainer>
       <TitleContainer>
         <CardTitle>
           {brand}
@@ -75,10 +81,12 @@ const Card = ({ item }) => {
         <li>{type}</li>
         <li>{brand}</li>
         <li>{id}</li>
-        <li>{accessories[2].split(" ")[0]}</li>
+        <li>
+          {accessories.find((element) => element.split(" ").length < 3) ||
+            functionalities.find((element) => element.split(" ").length < 3) ||
+            "Power liftgate"}
+        </li>
       </AdditionalInfo>
-
-      <Button onClick={handleModalOpen}>Learn more</Button>
 
       {isModalOpen &&
         createPortal(
