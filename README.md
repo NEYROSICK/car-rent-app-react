@@ -5,18 +5,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/neyrosick/car-rent-app-react/commits">
-    <img src="https://img.shields.io/github/last-commit/neyrosick/car-rent-app-react?logo=github" alt="GitHub last commit">
-  </a>
-  <a href="https://github.com/neyrosick/car-rent-app-react/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/neyrosick/car-rent-app-react/pages%2Fpages-build-deployment?logo=github" alt="GitHub Workflow Status">
-  </a>
-  <a href="https://github.com/NEYROSICK/car-rent-app-react/issues">
-    <img src="https://img.shields.io/github/issues/neyrosick/car-rent-app-react?logo=github" alt="GitHub issues">
-  </a>
-  <a href="https://www.linkedin.com/in/danylohatak/">
-    <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin" alt="LinkedIn">
-  </a>
+  <a href="https://github.com/neyrosick/car-rent-app-react/commits"><img src="https://img.shields.io/github/last-commit/neyrosick/car-rent-app-react?logo=github" alt="GitHub last commit"/></a>
+  <a href="https://github.com/neyrosick/car-rent-app-react/actions"><img src="https://img.shields.io/github/actions/workflow/status/neyrosick/car-rent-app-react/pages%2Fpages-build-deployment?logo=github" alt="GitHub Workflow Status"/></a>
+  <a href="https://github.com/NEYROSICK/car-rent-app-react/issues"><img src="https://img.shields.io/github/issues/neyrosick/car-rent-app-react?logo=github" alt="GitHub issues"/></a>
+  <a href="https://www.linkedin.com/in/danylohatak/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin" alt="LinkedIn"/></a>
 </p>
 
 <details>
@@ -89,10 +81,10 @@ Inside each card you can see information about specific car, such as brand, mode
 
 If there's not enough сar options available, you can click on `Load more` to increase amount of cards displayed on your sreen
 
-<p >
-  <img src="./src/assets/readme/load-more-idle.png" alt="Loading idle" width="32.9%"/>
-  <img src="./src/assets/readme/load-more-in-progress.png" alt="Loading in progress" width="32.9%"/>
-  <img src="./src/assets/readme/load-more-done.png" alt="Loading complete" width="32.9%">
+<p align="center">
+  <img src="./src/assets/readme/load-more-idle.png" alt="Loading idle" width="32%"/>
+  <img src="./src/assets/readme/load-more-in-progress.png" alt="Loading in progress" width="32%"/>
+  <img src="./src/assets/readme/load-more-done.png" alt="Loading complete" width="32%">
 </p>
 
 Pagination works for every page in the website also including `filtered list` in catalog page.
