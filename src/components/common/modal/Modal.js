@@ -109,7 +109,7 @@ const Modal = ({ item, isModalOpen, setIsModalOpen }) => {
             })}
 
             <li>
-              Mileage: <Brand>{mileage}</Brand>
+              Mileage: <Brand>{Number(mileage).toLocaleString()}</Brand>
             </li>
             <li>
               Price: <Brand>{rentalPrice}</Brand>
