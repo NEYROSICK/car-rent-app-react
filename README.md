@@ -4,28 +4,20 @@
   <img src="./src/assets/readme/carspace.png" alt="Carspace logo" width="520"/>
 </p>
 
-<ul style="display: flex; list-style-type: none; gap: 5px; justify-content: center; padding: 0; margin-top: 5px">
-  <li>
-    <a href="https://github.com/neyrosick/car-rent-app-react/commits">
-      <img src="https://img.shields.io/github/last-commit/neyrosick/car-rent-app-react?logo=github" alt="GitHub last commit">
-    </a>
-  </li>
-  <li>
-    <a href="https://github.com/neyrosick/car-rent-app-react/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/neyrosick/car-rent-app-react/pages%2Fpages-build-deployment?logo=github" alt="GitHub Workflow Status">
-    </a>
-  </li>
-  <li>
-    <a href="https://github.com/NEYROSICK/car-rent-app-react/issues">
-      <img src="https://img.shields.io/github/issues/neyrosick/car-rent-app-react?logo=github" alt="GitHub issues">
-    </a>
-  </li>
-  <li>
-    <a href="https://www.linkedin.com/in/danylohatak/">
-      <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin" alt="LinkedIn">
-    </a>
-  </li>
-</ul>
+<p align="center">
+  <a href="https://github.com/neyrosick/car-rent-app-react/commits">
+    <img src="https://img.shields.io/github/last-commit/neyrosick/car-rent-app-react?logo=github" alt="GitHub last commit">
+  </a>
+  <a href="https://github.com/neyrosick/car-rent-app-react/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/neyrosick/car-rent-app-react/pages%2Fpages-build-deployment?logo=github" alt="GitHub Workflow Status">
+  </a>
+  <a href="https://github.com/NEYROSICK/car-rent-app-react/issues">
+    <img src="https://img.shields.io/github/issues/neyrosick/car-rent-app-react?logo=github" alt="GitHub issues">
+  </a>
+  <a href="https://www.linkedin.com/in/danylohatak/">
+    <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin" alt="LinkedIn">
+  </a>
+</p>
 
 <details>
 <summary>Table of Contents</summary>
@@ -97,17 +89,11 @@ Inside each card you can see information about specific car, such as brand, mode
 
 If there's not enough сar options available, you can click on `Load more` to increase amount of cards displayed on your sreen
 
-<ul style="display: flex; list-style-type: none; gap: 5px; padding: 0">
-  <li>
-    <img src="./src/assets/readme/load-more-idle.png" alt="Loading idle">
-  </li>
-  <li>
-    <img src="./src/assets/readme/load-more-in-progress.png" alt="Loading in progress">
-  </li>
-  <li>
-    <img src="./src/assets/readme/load-more-done.png" alt="Loading complete">
-  </li>
-</ul>
+<p >
+  <img src="./src/assets/readme/load-more-idle.png" alt="Loading idle" width="32.9%"/>
+  <img src="./src/assets/readme/load-more-in-progress.png" alt="Loading in progress" width="32.9%"/>
+  <img src="./src/assets/readme/load-more-done.png" alt="Loading complete" width="32.9%">
+</p>
 
 Pagination works for every page in the website also including `filtered list` in catalog page.
 
@@ -151,13 +137,13 @@ When you no longer want certain car in your favorites simply click on heart butt
 
 ## Contributing
 
-<div align=center style='margin-bottom: 10px'>
+<p align=center style='margin-bottom: 10px'>
   <a href="https://github.com/neyrosick/car-rent-app-react/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
   ·
   <a href="https://github.com/neyrosick/car-rent-app-react/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
   ·
   <a href="https://www.linkedin.com/in/danylohatak/">Ask a Question</a>
-</div>
+</p>
 
 First off, thanks for taking the time to contribute! Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are greatly appreciated.
 
@@ -168,7 +154,8 @@ Please try to create bug reports that are:
 - _Unique._ Do not duplicate existing opened issues.
 - _Scoped to a Single Bug._ One bug per report.
 
-<p style="display: flex; justify-content: space-between">
-  Your contributions are always welcome
-  <a align="right" href="#description">(Back to top)</a>
+Your contributions are always welcome
+
+<p align="right">
+  <a href="#description">(Back to top)</a>
 </p>
