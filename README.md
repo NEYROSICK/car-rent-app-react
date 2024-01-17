@@ -1,5 +1,3 @@
-<!-- # Carspace - online car rent marketplace. -->
-
 <p align="center">
   <img src="./src/assets/readme/carspace.png" alt="Carspace logo" width="520"/>
 </p>
@@ -16,7 +14,7 @@
 
 - [Description](#description)
 - [Built with](#built-with)
-- [Usage](#Usage)
+- [Usage](#usage)
   - [Preparation](#preparation)
   - [Main page](#main-page)
   - [Catalog page](#catalog-page)
